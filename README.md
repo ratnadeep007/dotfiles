@@ -7,4 +7,4 @@ Things which should be installed:
 - tmux
 - nvim
 
-* can be ignored on mac
+\* can be ignored on mac
