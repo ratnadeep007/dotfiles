@@ -19,7 +19,6 @@ lvim.plugins = {
 	  version = 'v0.2.0',
 	  config = function()
 		  require('modes').setup()
-      vim.opt.guicursor = "i:block-blinkwait0-blinkon30-blinkoff10"
 	  end
   }
 }
