@@ -16,7 +16,7 @@ lvim.plugins = {
 	},
   {
 	  'mvllow/modes.nvim',
-	  tag = 'v0.2.0',
+	  version = 'v0.2.0',
 	  config = function()
 		  require('modes').setup()
       vim.opt.guicursor = "i:block-blinkwait0-blinkon30-blinkoff10"
@@ -27,8 +27,6 @@ lvim.plugins = {
 lvim.colorscheme = "catppuccin"
 
 vim.wo.relativenumber = true
-
-vim.opt.guicursor = "i:block-blinkwait0-blinkon30-blinkoff10"
 
 -- no need to set style = "lvim"
 local components = require("lvim.core.lualine.components")
