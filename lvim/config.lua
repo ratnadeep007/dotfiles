@@ -60,8 +60,8 @@ local colors = {
 
 local bubbles_theme = {
   normal = {
-    a = { fg = colors.black, bg = colors.rosewater },
-    b = { fg = colors.white, bg = colors.pink },
+    a = { fg = colors.base, bg = colors.rosewater },
+    b = { fg = colors.base, bg = colors.pink },
     c = { fg = colors.white, bg = colors.base },
     x = { fg = colors.white, bg = colors.base },
     y = { fg = colors.base, bg = colors.flamingo },
