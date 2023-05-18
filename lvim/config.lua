@@ -44,7 +44,7 @@ local colors = {
   text      = '#cdd6f4',
   rosewater = '#cdd6f4',
   flamingo  = '#f2cdcd',
-  pink      = '#f2cdcd',
+  pink      = '#f5c2e2',
   mauve     = '#cba6f7',
   read      = '#f38ba8',
   maroon    = '#eba0ac',
@@ -70,15 +70,15 @@ local bubbles_theme = {
 
   insert = {
     a = { fg = colors.black, bg = colors.green },
-    b = { fg = colors.white, bg = colors.pink },
+    b = { fg = colors.base, bg = colors.pink },
     c = { fg = colors.white, bg = colors.base },
     x = { fg = colors.white, bg = colors.base },
-    y = { fg = colors.base, bg = colors.flamingo },
+    y = { fg = colors.base, bg = colors.green },
     z = { fg = colors.base, bg = colors.maroon }
   },
   visual = {
     a = { fg = colors.black, bg = colors.blue },
-    b = { fg = colors.white, bg = colors.pink },
+    b = { fg = colors.base, bg = colors.pink },
     c = { fg = colors.white, bg = colors.base },
     x = { fg = colors.white, bg = colors.base },
     y = { fg = colors.base, bg = colors.lavender },
