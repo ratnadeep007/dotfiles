@@ -5,6 +5,7 @@
 
 lvim.plugins = {
   { "catppuccin/nvim", name = "catppuccin" },
+  { "mg979/vim-visual-multi", name = "vim-visual-multi" },
   {
     'stevearc/aerial.nvim',
     opts = {},
