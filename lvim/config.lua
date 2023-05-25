@@ -3,34 +3,7 @@
 -- Forum: https://www.reddit.com/r/lunarvim/
 -- Discord: https://discord.com/invite/Xb9B4Ny
 
-lvim.plugins = {
-  { "catppuccin/nvim", name = "catppuccin" },
-  { "mg979/vim-visual-multi", name = "vim-visual-multi" },
-  {
-    'stevearc/aerial.nvim',
-    opts = {},
-    -- Optional dependencies
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons"
-    },
-  },
-  {
-    'mvllow/modes.nvim',
-    version = 'v0.2.0',
-    config = function()
-      require('modes').setup()
-    end
-  }
-}
-
-lvim.colorscheme = "catppuccin"
-
-vim.wo.relativenumber = true
-
--- no need to set style = "lvim"
-local components = require("lvim.core.lualine.components")
-
+lvim.transparent_window = true
 
 -- bubble theme
 -- stylua: ignore
@@ -58,6 +31,64 @@ local colors = {
   blue      = '#89b4fa',
   lavender  = '#b4befe'
 }
+
+lvim.keys.normal_mode["|"] = ":vsplit<CR>"
+lvim.keys.normal_mode["-"] = ":split<CR>"
+
+lvim.plugins = {
+  { "catppuccin/nvim", name = "catppuccin" },
+  { "mg979/vim-visual-multi", name = "vim-visual-multi" },
+  { "Exafunction/codeium.vim", name = "codeium" },
+  { "ryanoasis/vim-devicons", name="vim-devicons" },
+  {
+    'stevearc/aerial.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
+    },
+  },
+  {
+    'ratnadeep007/modes.nvim',
+    version = 'v1.1',
+    config = function()
+      require('modes').setup({
+        colors = {
+          copy = colors.rosewater,
+          delete = colors.red,
+          insert = colors.green,
+          visual = colors.blue,
+          replace = colors.pink,
+          normal = colors.blue,
+        },
+        line_opacity = 0.15,
+        set_cursor = true,
+        set_cursorline = true,
+        set_number = true,
+      })
+    end
+  }
+}
+
+lvim.colorscheme = "catppuccin"
+
+vim.wo.relativenumber = true
+
+-- no need to set style = "lvim"
+local components = require("lvim.core.lualine.components")
+
+-- to make cursor block in insert mode
+-- vim.opt.guicursor:append('i-ci-ve:block-ModesInsert')
+vim.opt.guicursor = "i:block"
+
+-- vim.cmd([[
+--   augroup CustomCursorColor
+--   autocmd!
+--   autocmd VimEnter,ColorScheme * highlight Cursor guifg=#FF0000 guibg=#FF0000
+--   augroup END
+-- ]])
+
 
 local bubbles_theme = {
   normal = {
