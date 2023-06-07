@@ -146,12 +146,12 @@ lvim.plugins = {
     end
   }
 }
-require("neo-tree").setup({
-  close_if_last_window = true,
-  popup_border_style = "rounded",
-  enable_git_status = true,
-  enable_diagnostics = true,
-})
+-- require("neo-tree").setup({
+--   close_if_last_window = true,
+--   popup_border_style = "rounded",
+--   enable_git_status = true,
+--   enable_diagnostics = true,
+-- })
 -- vim.api.nvim_create_augroup("neotree", {})
 -- vim.api.nvim_create_autocmd("VimEnter", {
 --   desc = "Open Neotree automatically",
