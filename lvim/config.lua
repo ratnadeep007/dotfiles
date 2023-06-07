@@ -144,6 +144,12 @@ lvim.plugins = {
         background_colour = "#000000",
       })
     end
+  },
+  {
+    'ggandor/leap.nvim',
+    config = function()
+      require('leap').add_default_mappings()
+    end
   }
 }
 -- require("neo-tree").setup({
