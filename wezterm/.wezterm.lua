@@ -18,7 +18,7 @@ end
 
 -- For example, changing the color scheme:
 config.color_scheme = 'Abernathy'
-config.window_background_opacity = 0.8
+config.window_background_opacity = 1.0
 config.enable_wayland = true
 config.hide_tab_bar_if_only_one_tab = true
 config.enable_tab_bar = false

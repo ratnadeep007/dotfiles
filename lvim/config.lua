@@ -4,7 +4,7 @@
 -- Discord: https://discord.com/invite/Xb9B4Ny
 
 
-lvim.transparent_window = true
+lvim.transparent_window = false
 -- vim.lsp.handlers["textDocument/signatureHelp"] = nil
 -- lvim.lsp.handlers = nil
 -- lvim.builtin.nvimtree.active = false
@@ -36,14 +36,29 @@ local colors = {
   lavender  = '#b4befe'
 }
 
+local dracula_colors = {
+  green  = '#50fa7b',
+  orange = '#ffb86c',
+  pink   = '#ff79c6',
+  purple = '#bd93f9',
+  red    = '#ff5555',
+  yellow = '#f1fa8c'
+}
+
 lvim.keys.normal_mode["<C-h>"] = "<cmd>vsplit<CR>"
 lvim.keys.normal_mode["<C-v>"] = "<cmd>split<CR>"
 
 lvim.plugins = {
-  { "catppuccin/nvim",         name = "catppuccin" },
-  { "mg979/vim-visual-multi",  name = "vim-visual-multi" },
-  { "Exafunction/codeium.vim", name = "codeium" },
-  { "ryanoasis/vim-devicons",  name = "vim-devicons" },
+  { "catppuccin/nvim",        name = "catppuccin" },
+  { "mg979/vim-visual-multi", name = "vim-visual-multi" },
+  {
+    "Exafunction/codeium.vim",
+    name = "codeium",
+    config = function()
+      vim.keymap.set('i', '<C-cr>', function() return vim.fn["codeium#Accept"]() end, { expr = true })
+    end
+  },
+  { "ryanoasis/vim-devicons", name = "vim-devicons" },
   {
     "norcalli/nvim-colorizer.lua",
     name = "nvim-colorizer",
@@ -199,25 +214,25 @@ vim.opt.guicursor = "i:block"
 
 local bubbles_theme = {
   normal = {
-    a = { fg = colors.base, bg = colors.mauve },
+    a = { fg = colors.base, bg = dracula_colors.pink },
     b = { fg = colors.base, bg = colors.rosewater },
     c = { fg = colors.white, bg = colors.base },
     x = { fg = colors.white, bg = colors.base },
-    y = { fg = colors.base, bg = colors.mauve },
-    z = { fg = colors.base, bg = colors.peach }
+    y = { fg = colors.black, bg = dracula_colors.pink },
+    z = { fg = colors.black, bg = colors.peach }
   },
 
   insert = {
-    a = { fg = colors.black, bg = colors.green },
+    a = { fg = colors.base, bg = dracula_colors.green },
     b = { fg = colors.base, bg = colors.pink },
     c = { fg = colors.white, bg = colors.base },
     x = { fg = colors.white, bg = colors.base },
-    y = { fg = colors.base, bg = colors.green },
+    y = { fg = colors.base, bg = dracula_colors.green },
     z = { fg = colors.base, bg = colors.maroon }
   },
   visual = {
     a = { fg = colors.black, bg = colors.blue },
-    b = { fg = colors.base, bg = colors.pink },
+    b = { fg = colors.base, bg = dracula_colors.pink },
     c = { fg = colors.white, bg = colors.base },
     x = { fg = colors.white, bg = colors.base },
     y = { fg = colors.base, bg = colors.blue },
