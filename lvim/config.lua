@@ -55,7 +55,7 @@ lvim.plugins = {
     "Exafunction/codeium.vim",
     name = "codeium",
     config = function()
-      vim.keymap.set('i', '<C-cr>', function() return vim.fn["codeium#Accept"]() end, { expr = true })
+      vim.keymap.set('i', '<C-cr>', function() return vim.fn["Codeium#Accept"]() end, { expr = true })
     end
   },
   { "ryanoasis/vim-devicons", name = "vim-devicons" },
@@ -66,19 +66,19 @@ lvim.plugins = {
       require("colorizer").setup()
     end
   },
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    name = "neo-tree",
-    keys = {
-      { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
-    },
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-    },
-    config = function()
-    end
-  },
+  -- {
+  --   "nvim-neo-tree/neo-tree.nvim",
+  --   name = "neo-tree",
+  --   keys = {
+  --     { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
+  --   },
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --   },
+  --   config = function()
+  --   end
+  -- },
   {
     'stevearc/aerial.nvim',
     opts = {},
@@ -247,10 +247,10 @@ local bubbles_theme = {
   },
 }
 
-lvim.builtin.lualine.options.section_separators = {
-  left = '',
-  right = ''
-}
+-- lvim.builtin.lualine.options.section_separators = {
+--   left = '',
+--   right = ''
+-- }
 lvim.builtin.lualine.options.component_separators = '|'
 lvim.builtin.lualine.sections.lualine_a = {
   {
