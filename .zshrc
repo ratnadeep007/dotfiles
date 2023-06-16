@@ -163,7 +163,7 @@ fi
 # eval "$(zoxide init zsh)"
 
 # alias tmux to tn to name session as folder name
-alias tn="tmux new -s $(pwd | sed 's/.*\///g')"
+alias tn="tmux new -s \$(pwd | sed 's/.*\///g')"
 
 # export t-session-manager to path
 export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
