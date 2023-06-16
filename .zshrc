@@ -170,3 +170,6 @@ export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
 
 # alias lazygit to lg
 alias lg=lazygit
+
+# alias nanx to nano --nohelp
+alias nanx="nano --nohelp"
