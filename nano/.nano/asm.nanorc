@@ -14,7 +14,9 @@ color brightcyan "^[[:space:]]*#[[:space:]]*(define|undef|include|ifn?def|endif|
 color brightyellow "<[^= 	]*>" ""(\\.|[^"])*""
 color brightyellow start=""(\\.|[^"])*\\[[:space:]]*$" end="^(\\.|[^"])*""
 ## Highlight comments
-color brightblue "^\s*//.*"
-color brightblue start="/\*" end="\*/"
+color brightblack "^\s*;.*"
+color brightblack start="/\*" end="\*/"
 ## Highlight trailing whitespace
-color ,green "[[:space:]]+$"
+color green "[[:space:]]+$"
+color brightblue "\b(add|sub|mov|jmp|call|ret|push|pop|cmp|lea|nop|xor|and|or|not|test|inc|dec|mul|div|shl|shr|rol|rcl|ror|rcr|sal|sar|idiv|int|lodsb|times|dw|db|jz|hlt)\b"
+color brightgreen "\b(bits|org)\b"
