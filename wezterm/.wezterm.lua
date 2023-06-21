@@ -22,8 +22,7 @@ config.window_background_opacity = 1.0
 config.enable_wayland = true
 config.hide_tab_bar_if_only_one_tab = true
 config.enable_tab_bar = false
--- config.font =
---     wezterm.font("JetBrainsMonoNL Nerd Font Mono")
+-- config.font = wezterm.font("Comic Shanns Mono", { weight = "Regular"})
 
 -- and finally, return the configuration to wezterm
 return config
