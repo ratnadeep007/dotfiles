@@ -3,6 +3,7 @@
 -- if true then return {} end
 --
 
+
 -- lsp config for lualine
 local lsp = {
   function()
@@ -81,6 +82,8 @@ local dracula_colors = {
   red = "#ff5555",
   yellow = "#f1fa8c",
 }
+
+vim.cmd(string.format("hi! Folded guifg=%s guibg=%s", dracula_colors.orange, colors.grey))
 -- every spec file under config.plugins will be loaded automatically by lazy.nvim
 --
 -- In your plugin files, you can:
@@ -256,7 +259,7 @@ return {
 
       return {
         options = {
-          theme = "auto",
+          theme = "dracula",
           disable_filetypes = { statusline = { "dashboard", "alpha" } },
         },
         sections = {
@@ -393,7 +396,15 @@ return {
       })
     end,
   },
-  { "Mofiqul/dracula.nvim", name = "dracula" },
+  {
+    "Mofiqul/dracula.nvim",
+    name = "dracula",
+    config = function()
+      require("dracula").setup({
+        italic_comment = true,
+      })
+    end,
+  },
   {
     "nvim-neo-tree/neo-tree.nvim",
     cmd = "Neotree",
@@ -484,9 +495,10 @@ return {
     "anuvyklack/pretty-fold.nvim",
     config = function()
       require("pretty-fold").setup({
-        fill_char = "----",
+        -- fill_char = "----",
         sections = {
           left = {
+            "+- ",
             "content",
           },
           right = {
