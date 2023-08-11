@@ -180,3 +180,17 @@ export PATH=$WATCOM/binl:$PATH
 export EDPATH=$WATCOM/eddat
 export WIPFC=$WATCOM/wipfc
 export PATH="$PATH:$HOME/scripts"
+
+# gum related scripts stuff
+export SCRIPTS=$HOME/scripts
+export PATH="$PATH:$SCRIPTS"
+# vm related paths
+export DISK_PATH=$HOME/vms/disk/
+export ISO_PATH=$HOME/vms/iso/
+
+export NIX_BUILD_SHELL="zsh"
+
+
+export WASMTIME_HOME="$HOME/.wasmtime"
+
+export PATH="$WASMTIME_HOME/bin:$PATH"
