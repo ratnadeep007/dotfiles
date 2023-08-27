@@ -186,10 +186,10 @@ return {
       servers = {
         -- tsserver will be automatically installed with mason and loaded with lspconfig
         -- pyright will be automatically installed with mason and loaded with lspconfig
-        tsserver = {},
-        pyright = {},
-        gopls = {},
-        rust_analyzer = {},
+        -- tsserver = {},
+        -- pyright = {},
+        -- gopls = {},
+        -- rust_analyzer = {},
       },
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
@@ -443,7 +443,7 @@ return {
       open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "Outline" },
       filesystem = {
         bind_to_cwd = false,
-        follow_current_file = true,
+        follow_current_file = { enable = true },
         use_libuv_file_watcher = true,
       },
       window = {
@@ -559,6 +559,38 @@ return {
         },
       })
     end,
+  },
+  {
+    "akinsho/git-conflict.nvim",
+    version = "*",
+    config = true,
+  },
+  {
+    "tpope/vim-fugitive",
+    keys = {
+      { "<leader>gf", "<cmd>tab Git<cr>", desc = "Open fugitive" },
+      { "<leader>gp", "<cmd>tab Git push<cr>", desc = "Fugittive push" },
+      { "<leader>gbb", "<cmd>Git diff<cr>", desc = "Fugittive diff" },
+    },
+  },
+  {
+    "stevearc/oil.nvim",
+    opts = {},
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = {
+      { "<leader>o", "<cmd>Oil<cr>", desc = "Oil" },
+    },
+  },
+  {
+    "stevearc/aerial.nvim",
+    opts = {},
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    keys = {
+      { "<leader>a", "<cmd>AerialToggle<cr>", desc = "AerialToggle" },
+    },
   },
 }
 
