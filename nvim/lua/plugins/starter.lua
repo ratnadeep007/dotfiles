@@ -568,9 +568,9 @@ return {
   {
     "tpope/vim-fugitive",
     keys = {
-      { "<leader>gf", "<cmd>tab Git | Git diff<cr>", desc = "Open fugitive" },
-      { "<leader>gp", "<cmd>tab Git push<cr>", desc = "Fugittive push" },
-      { "<leader>gbb", "<cmd>Git diff<cr>", desc = "Fugittive diff" },
+      { "<leader>fgf", "<cmd>tab Git | Git diff<cr>", desc = "Open fugitive" },
+      { "<leader>fgp", "<cmd>tab Git push<cr>", desc = "Fugittive push" },
+      { "<leader>fgb", "<cmd>Git diff<cr>", desc = "Fugittive diff" },
     },
   },
   {
