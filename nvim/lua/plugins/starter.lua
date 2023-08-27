@@ -568,7 +568,7 @@ return {
   {
     "tpope/vim-fugitive",
     keys = {
-      { "<leader>gf", "<cmd>tab Git<cr>", desc = "Open fugitive" },
+      { "<leader>gf", "<cmd>tab Git | Git diff<cr>", desc = "Open fugitive" },
       { "<leader>gp", "<cmd>tab Git push<cr>", desc = "Fugittive push" },
       { "<leader>gbb", "<cmd>Git diff<cr>", desc = "Fugittive diff" },
     },
@@ -590,6 +590,24 @@ return {
     },
     keys = {
       { "<leader>a", "<cmd>AerialToggle<cr>", desc = "AerialToggle" },
+    },
+  },
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    config = true,
+    keys = {
+      {
+        "<leader>th",
+        "<cmd>ToggleTerm term://*toggleterm#* size=15 direction=horizontal<cr>",
+        desc = "ToggleTerm horizontal",
+      },
+      {
+        "<leader>tv",
+        "<cmd>ToggleTerm term://*toggleterm#* size=45 direction=vertical<cr>",
+        desc = "ToggleTerm vertical",
+      },
+      { "<leader>tf", "<cmd>ToggleTerm term://*toggleterm#* direction=float<cr>", desc = "ToggleTerm float" },
     },
   },
 }
