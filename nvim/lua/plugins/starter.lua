@@ -570,9 +570,8 @@ return {
   {
     "tpope/vim-fugitive",
     keys = {
-      { "<leader>fgf", "<cmd>tab Git diff | Git<cr>", desc = "Open fugitive" },
-      { "<leader>fgp", "<cmd>tab Git push<cr>", desc = "Fugittive push" },
-      { "<leader>fgb", "<cmd>Git diff<cr>", desc = "Fugittive diff" },
+      { "<leader>fgf", "<cmd>Git<cr>", desc = "Open fugitive" },
+      { "<leader>fgp", "<cmd>Git push<cr>", desc = "Fugittive push" },
     },
     lazy = false,
   },
@@ -667,5 +666,12 @@ return {
   },
   {
     "tpope/vim-dadbod",
+  },
+  {
+    "sindrets/diffview.nvim",
+    keys = {
+      { "<leader>fgdo", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
+      { "<leader>fgdc", "<cmd>DiffviewOpen<cr>", desc = "Close Diffview" },
+    },
   },
 }
