@@ -574,6 +574,7 @@ return {
       { "<leader>fgp", "<cmd>tab Git push<cr>", desc = "Fugittive push" },
       { "<leader>fgb", "<cmd>Git diff<cr>", desc = "Fugittive diff" },
     },
+    lazy = false,
   },
   {
     "stevearc/oil.nvim",
@@ -663,5 +664,8 @@ return {
         end
       end)
     end,
+  },
+  {
+    "tpope/vim-dadbod",
   },
 }
