@@ -12,6 +12,7 @@ plug "zap-zsh/supercharge"
 plug "zap-zsh/zap-prompt"
 plug "zap-zsh/exa"
 plug "zsh-users/zsh-syntax-highlighting"
+plug "jeffreytse/zsh-vi-mode"
 eval "$(starship init zsh)"
 # plug "wintermi/zsh-starship"
 
@@ -195,3 +196,12 @@ export WASMTIME_HOME="$HOME/.wasmtime"
 
 export PATH="$WASMTIME_HOME/bin:$PATH"
 export LANG=en_US.UTF-8
+
+# This function will be automatically executed by the plugin
+zvm_before_init() {
+  local ncur=$(zvm_cursor_style $ZVM_NORMAL_MODE_CURSOR)
+  local icur=$(zvm_cursor_style $ZVM_INSERT_MODE_CURSOR)
+
+  ZVM_INSERT_MODE_CURSOR=$ncur'\e\e]12;#50fa7b\a'
+  ZVM_NORMAL_MODE_CURSOR=$ncur'\e\e]12;#f8f8f2\a'
+}
