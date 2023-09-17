@@ -51,7 +51,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 alias open=xdg-open
-source "$HOME/.rye/env"
+#source "$HOME/.rye/env"
 alias aggc="agg --theme monokai --font-dir /usr/share/fonts/TTF --font-family 'ComicShannsMono Nerd Font Mono,Symbols Nerd Font Mono,Noto Emoji' --font-size 15"
 # alias cd="zoxide"
 alias z="zoxide"
@@ -163,7 +163,7 @@ fi
 # eval "$(zoxide init zsh)"
 
 # alias tmux to tn to name session as folder name
-alias tn="tmux new -s \$(pwd | sed 's/.*\///g')"
+alias tn="tmux -u new -s \$(pwd | sed 's/.*\///g')"
 
 # export t-session-manager to path
 export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
@@ -194,3 +194,4 @@ export NIX_BUILD_SHELL="zsh"
 export WASMTIME_HOME="$HOME/.wasmtime"
 
 export PATH="$WASMTIME_HOME/bin:$PATH"
+export LANG=en_US.UTF-8
