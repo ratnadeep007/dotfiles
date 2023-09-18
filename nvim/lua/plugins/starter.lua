@@ -128,13 +128,22 @@ local dracula_colors = {
 -- * override the configuration of LazyVim plugins
 return {
   -- add gruvbox
-  -- { "ellisonleao/gruvbox.nvim" },
+  { "ellisonleao/gruvbox.nvim" },
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  {
+    "Mofiqul/dracula.nvim",
+    name = "dracula",
+    config = function()
+      require("dracula").setup({
+        italic_comment = true,
+      })
+    end,
+  },
   -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "dracula",
+      colorscheme = "gruvbox",
     },
   },
 
@@ -295,7 +304,7 @@ return {
 
       return {
         options = {
-          theme = "dracula",
+          theme = "gruvbox",
           disable_filetypes = { statusline = { "dashboard", "alpha" } },
         },
         sections = {
@@ -429,15 +438,6 @@ return {
         set_cursor = true,
         set_cursorline = true,
         set_number = true,
-      })
-    end,
-  },
-  {
-    "Mofiqul/dracula.nvim",
-    name = "dracula",
-    config = function()
-      require("dracula").setup({
-        italic_comment = true,
       })
     end,
   },

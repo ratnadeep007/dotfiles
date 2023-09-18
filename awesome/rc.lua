@@ -43,6 +43,22 @@ local dracula = {
 	yellow = "#f1fa8c",
 }
 
+-- gruvbox
+local gruvbox = {
+	background = "#282828",
+	current_line = "#928374",
+	foreground = "#fbf1c7",
+	comment = "#32302f",
+	cyan = "#83a598",
+	green = "#b8bb26",
+	orange = "#fe8019",
+	pink = "#d3869b",
+	purple = "#b16286",
+	yellow = "#fabd2f",
+}
+
+local choosenColor = gruvbox
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -79,8 +95,8 @@ end
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 beautiful.useless_gap = 15
 beautiful.border_width = 3
-beautiful.border_normal = dracula.comment
-beautiful.border_focus = dracula.green
+beautiful.border_normal = choosenColor.comment
+beautiful.border_focus = choosenColor.green
 
 -- This is used later as the default terminal and editor to run.
 terminal = "wezterm"
@@ -219,7 +235,8 @@ local function set_wallpaper(s)
 	-- 	end
 	-- 	gears.wallpaper.maximized(wallpaper, s, true)
 	-- end
-	gears.wallpaper.maximized("/home/darklord/Pictures/mountain.jpg")
+	-- gears.wallpaper.maximized("/home/darklord/Pictures/mountain.jpg")
+	gears.wallpaper.maximized("/home/darklord/Pictures/forest.jpg")
 end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
@@ -382,14 +399,14 @@ globalkeys = gears.table.join(
 		awful.screen.focused().mypromptbox:run()
 	end, { description = "run prompt", group = "launcher" }),
 
-	awful.key({ modkey }, "x", function()
-		awful.prompt.run({
-			prompt = "Run Lua code: ",
-			textbox = awful.screen.focused().mypromptbox.widget,
-			exe_callback = awful.util.eval,
-			history_path = awful.util.get_cache_dir() .. "/history_eval",
-		})
-	end, { description = "lua execute prompt", group = "awesome" }),
+	-- awful.key({ modkey }, "x", function()
+	-- 	awful.prompt.run({
+	-- 		prompt = "Run Lua code: ",
+	-- 		textbox = awful.screen.focused().mypromptbox.widget,
+	-- 		exe_callback = awful.util.eval,
+	-- 		history_path = awful.util.get_cache_dir() .. "/history_eval",
+	-- 	})
+	-- end, { description = "lua execute prompt", group = "awesome" }),
 	-- Menubar
 	awful.key({ modkey }, "p", function()
 		awful.spawn("rofi -show drun")

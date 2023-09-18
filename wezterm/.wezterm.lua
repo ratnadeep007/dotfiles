@@ -17,7 +17,8 @@ end
 -- This is where you actually apply your config choices
 
 -- For example, changing the color scheme:
-config.color_scheme = "Dracula (Official)"
+-- config.color_scheme = "Dracula (Official)"
+config.color_scheme = "Gruvbox Dark (Gogh)"
 config.window_background_opacity = 1.0
 config.enable_wayland = true
 config.hide_tab_bar_if_only_one_tab = true
