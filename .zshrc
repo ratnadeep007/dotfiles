@@ -202,6 +202,11 @@ zvm_before_init() {
   local ncur=$(zvm_cursor_style $ZVM_NORMAL_MODE_CURSOR)
   local icur=$(zvm_cursor_style $ZVM_INSERT_MODE_CURSOR)
 
-  ZVM_INSERT_MODE_CURSOR=$ncur'\e\e]12;#50fa7b\a'
-  ZVM_NORMAL_MODE_CURSOR=$ncur'\e\e]12;#f8f8f2\a'
+  # Dracula themed
+  # ZVM_INSERT_MODE_CURSOR=$ncur'\e\e]12;#50fa7b\a'
+  # ZVM_NORMAL_MODE_CURSOR=$ncur'\e\e]12;#f8f8f2\a'
+  
+  # Gruvbox
+  ZVM_INSERT_MODE_CURSOR=$ncur'\e\e]12;#b8bb26\a'
+  ZVM_NORMAL_MODE_CURSOR=$ncur'\e\e]12;#fbf1c7\a'
 }
