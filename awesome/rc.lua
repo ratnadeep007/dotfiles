@@ -25,7 +25,7 @@ local has_fdo, freedesktop = pcall(require, "freedesktop")
 -- start picom and polybar
 
 awful.spawn("picom --fading")
-awful.spawn("polybar mybar")
+-- awful.spawn("polybar mybar")
 
 -- colors
 
@@ -97,6 +97,8 @@ beautiful.useless_gap = 15
 beautiful.border_width = 3
 beautiful.border_normal = choosenColor.comment
 beautiful.border_focus = choosenColor.green
+beautiful.tasklist_bg_focus = gruvbox.current_line
+beautiful.tasklist_bg_normal = gruvbox.background
 
 -- This is used later as the default terminal and editor to run.
 terminal = "wezterm"
@@ -280,29 +282,37 @@ awful.screen.connect_for_each_screen(function(s)
 		screen = s,
 		filter = awful.widget.tasklist.filter.currenttags,
 		buttons = tasklist_buttons,
+		style = {
+			icon_size = 0,
+		},
 	})
 
 	-- Create the wibox
-	-- s.mywibox = awful.wibar({ position = "bottom", screen = s })
+	s.mywibox = awful.wibar({
+		position = "top",
+		screen = s,
+		bg = "#282828",
+		height = 28,
+	})
 
 	-- Add widgets to the wibox
-	-- s.mywibox:setup({
-	-- 	layout = wibox.layout.align.horizontal,
-	-- 	{ -- Left widgets
-	-- 		layout = wibox.layout.fixed.horizontal,
-	-- 		mylauncher,
-	-- 		s.mytaglist,
-	-- 		s.mypromptbox,
-	-- 	},
-	-- 	s.mytasklist, -- Middle widget
-	-- 	{ -- Right widgets
-	-- 		layout = wibox.layout.fixed.horizontal,
-	-- 		mykeyboardlayout,
-	-- 		wibox.widget.systray(),
-	-- 		mytextclock,
-	-- 		s.mylayoutbox,
-	-- 	},
-	-- })
+	s.mywibox:setup({
+		layout = wibox.layout.align.horizontal,
+		{ -- Left widgets
+			layout = wibox.layout.fixed.horizontal,
+			mylauncher,
+			s.mytaglist,
+			s.mypromptbox,
+		},
+		s.mytasklist, -- Middle widget
+		{ -- Right widgets
+			layout = wibox.layout.fixed.horizontal,
+			-- mykeyboardlayout,
+			-- wibox.widget.systray(),
+			mytextclock,
+			s.mylayoutbox,
+		},
+	})
 end)
 -- }}}
 
@@ -422,7 +432,7 @@ clientkeys = gears.table.join(
 		c.fullscreen = not c.fullscreen
 		c:raise()
 	end, { description = "toggle fullscreen", group = "client" }),
-	awful.key({ modkey, "Shift" }, "c", function(c)
+	awful.key({ modkey }, "c", function(c)
 		c:kill()
 	end, { description = "close", group = "client" }),
 	awful.key(
@@ -526,7 +536,6 @@ awful.rules.rules = {
 	-- All clients will match this rule.
 	{
 		rule = {
-			size_hint_honor = false,
 		},
 		properties = {
 			border_width = beautiful.border_width,

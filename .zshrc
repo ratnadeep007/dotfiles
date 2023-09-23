@@ -210,3 +210,10 @@ zvm_before_init() {
   ZVM_INSERT_MODE_CURSOR=$ncur'\e\e]12;#b8bb26\a'
   ZVM_NORMAL_MODE_CURSOR=$ncur'\e\e]12;#fbf1c7\a'
 }
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# bun completions
+[ -s "/home/darklord/.bun/_bun" ] && source "/home/darklord/.bun/_bun"
