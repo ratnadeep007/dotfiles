@@ -300,7 +300,6 @@ return {
     opts = function(_, opts)
       local icons = require("lazyvim.config").icons
       local Util = require("lazyvim.util")
-      print(lsp)
 
       return {
         options = {
@@ -335,7 +334,7 @@ return {
   -- },
 
   -- use mini.starter instead of alpha
-  { import = "lazyvim.plugins.extras.ui.mini-starter" },
+  -- { import = "lazyvim.plugins.extras.ui.mini-starter" },
 
   -- add jsonls and schemastore ans setup treesitter for json, json5 and jsonc
   { import = "lazyvim.plugins.extras.lang.json" },
@@ -404,15 +403,15 @@ return {
       })
     end,
   },
-  {
-    "Exafunction/codeium.vim",
-    name = "codeium",
-    config = function()
-      vim.keymap.set("i", "<C-g>", function()
-        return vim.fn["codeium#Accept"]()
-      end, { expr = true })
-    end,
-  },
+  -- {
+  --   "Exafunction/codeium.vim",
+  --   name = "codeium",
+  --   config = function()
+  --     vim.keymap.set("i", "<C-g>", function()
+  --       return vim.fn["codeium#Accept"]()
+  --     end, { expr = true })
+  --   end,
+  -- },
   { "ryanoasis/vim-devicons", name = "vim-devicons" },
   {
     "norcalli/nvim-colorizer.lua",
@@ -530,16 +529,17 @@ return {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
+    enabled = false,
     opts = {
       -- add any options here
     },
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
+      -- "MunifTanjim/nui.nvim",
       -- OPTIONAL:
       --   `nvim-notify` is only needed, if you want to use the notification view.
       --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
+      -- "rcarriga/nvim-notify",
     },
     config = function()
       require("noice").setup({
