@@ -678,4 +678,10 @@ return {
       { "<leader>fgdc", "<cmd>DiffviewOpen<cr>", desc = "Close Diffview" },
     },
   },
+  {
+    "gelguy/wilder.nvim",
+    config = function()
+      require("wilder").setup({ modes = { ":", "/", "?" } })
+    end,
+  },
 }
