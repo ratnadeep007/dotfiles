@@ -527,6 +527,10 @@ return {
     end,
   },
   {
+    "rcarriga/nvim-notify",
+    enabled = false,
+  },
+  {
     "folke/noice.nvim",
     event = "VeryLazy",
     enabled = false,
@@ -673,6 +677,7 @@ return {
   },
   {
     "sindrets/diffview.nvim",
+    lazy = false,
     keys = {
       { "<leader>fgdo", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
       { "<leader>fgdc", "<cmd>DiffviewOpen<cr>", desc = "Close Diffview" },

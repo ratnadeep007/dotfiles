@@ -7,7 +7,6 @@ local ignore_filetypes = { "nvcheatsheet", "neo-tree", "Outline" }
 vim.api.nvim_create_autocmd("FileType", {
   pattern = ignore_filetypes,
   callback = function()
-    print("HELLO")
     -- if ignore_filetypes[vim.bo.filetype] or vim.bo.buftype == "nofile" then
     --   require("ufo").detach()
     --   vim.opt_local.foldenable = false
@@ -20,7 +19,6 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("BufEnter", {
   pattern = ignore_filetypes,
   callback = function()
-    print("HELLO")
     -- if ignore_filetypes[vim.bo.filetype] or vim.bo.buftype == "nofile" then
     --   require("ufo").detach()
     --   vim.opt_local.foldenable = false
