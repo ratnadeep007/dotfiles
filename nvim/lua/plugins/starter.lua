@@ -120,6 +120,28 @@ local dracula_colors = {
   yellow = "#f1fa8c",
 }
 
+local gruvbox_colors = {
+  background = "#282828",
+  gray_1 = "#928374",
+  gray_2 = "#a89984",
+  foreground_1 = "#ebdbb2",
+  foreground_2 = "#fbf1c7",
+  foreground_3 = "#d5c4a1",
+  foreground_4 = "#bdae93",
+  red_dark = "#cc241d",
+  red_light = "#fb4934",
+  green_dark = "#98971a",
+  green_light = "#b8bb26",
+  yellow_dark = "#d79921",
+  yellow_light = "#fabd2f",
+  blue_dark = "#458588",
+  blue_light = "#83a598",
+  purple_dark = "#b16286",
+  purple_light = "#d3869b",
+  aqua_dark = "#689d6a",
+  aqua_light = "#8ec07c",
+}
+
 -- every spec file under config.plugins will be loaded automatically by lazy.nvim
 --
 -- In your plugin files, you can:
@@ -426,12 +448,10 @@ return {
     config = function()
       require("modes").setup({
         colors = {
-          copy = colors.rosewater,
-          delete = colors.red,
-          insert = colors.green,
-          visual = colors.blue,
-          replace = colors.pink,
-          normal = colors.blue,
+          copy = gruvbox_colors.yellow_dark,
+          delete = gruvbox_colors.red_dark,
+          insert = gruvbox_colors.green_dark,
+          visual = gruvbox_colors.gray_2,
         },
         -- line_opacity = 0.15,
         set_cursor = true,
