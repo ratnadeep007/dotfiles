@@ -9,8 +9,8 @@ fi
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 plug "zsh-users/zsh-autosuggestions"
 plug "zap-zsh/supercharge"
-plug "zap-zsh/zap-prompt"
 plug "zap-zsh/exa"
+plug "zap-zsh/zap-prompt"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "jeffreytse/zsh-vi-mode"
 eval "$(starship init zsh)"
@@ -217,3 +217,5 @@ export NVM_DIR="$HOME/.nvm"
 
 # bun completions
 [ -s "/home/darklord/.bun/_bun" ] && source "/home/darklord/.bun/_bun"
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
