@@ -7,6 +7,9 @@
 
 -- vim.cmd([[hi FoldColumn guibg=green guifg=LightGray ctermbg=black ctermfg=LightGray]])
 
+-- copy to clipboard
+vim.opt.clipboard = "unnamedplus"
+
 -- Customise fold text
 local handler = function(virtText, lnum, endLnum, width, truncate)
   local newVirtText = {}
