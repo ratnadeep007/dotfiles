@@ -37,8 +37,7 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
     end
     curWidth = curWidth + chunkWidth
   end
-  local rAlignAppndx =
-    math.max(math.min(vim.opt.textwidth["_value"], width - 1) - curWidth - sufWidth, 0)
+  local rAlignAppndx = math.max(math.min(vim.opt.textwidth["_value"], width - 1) - curWidth - sufWidth, 0)
   suffix = (" "):rep(rAlignAppndx) .. suffix
   table.insert(newVirtText, { suffix, "MoreMsg" })
   return newVirtText
@@ -266,10 +265,10 @@ return {
       ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
       setup = {
         -- example to setup with typescript.nvim
-        tsserver = function(_, opts)
-          require("typescript").setup({ server = opts })
-          return true
-        end,
+        -- tsserver = function(_, opts)
+        --   require("typescript").setup({ server = opts })
+        --   return true
+        -- end,
         -- Specify * to use this function as a fallback for any server
         -- ["*"] = function(server, opts) end,
       },
@@ -711,5 +710,9 @@ return {
     config = function()
       require("wilder").setup({ modes = { ":", "/", "?" } })
     end,
+  },
+  {
+    "vimlab/split-term.vim",
+    lazy = false,
   },
 }
