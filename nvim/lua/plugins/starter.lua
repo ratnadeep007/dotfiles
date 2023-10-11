@@ -152,6 +152,7 @@ local gruvbox_colors = {
 -- * override the configuration of LazyVim plugins
 return {
   -- add gruvbox
+  { "stevedylandev/flexoki-nvim", name = "flexoki" },
   { "ellisonleao/gruvbox.nvim" },
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
@@ -167,7 +168,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox",
+      colorscheme = "flexoki",
     },
   },
 
@@ -327,7 +328,7 @@ return {
 
       return {
         options = {
-          theme = "gruvbox",
+          theme = "flexoki",
           disable_filetypes = { statusline = { "dashboard", "alpha" } },
         },
         sections = {
