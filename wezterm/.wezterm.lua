@@ -18,9 +18,10 @@ end
 
 -- For example, changing the color scheme:
 -- config.color_scheme = "Dracula (Official)"
-config.font = wezterm.font("Cascadia Code PL")
+-- config.font = wezterm.font("Cascadia Code PL")
+config.font = wezterm.font("Fira Code")
 config.color_scheme = "Gruvbox Dark (Gogh)"
-config.window_background_opacity = 1.0
+config.window_background_opacity = 2.0
 config.enable_wayland = true
 config.hide_tab_bar_if_only_one_tab = true
 config.enable_tab_bar = false
