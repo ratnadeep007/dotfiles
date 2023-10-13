@@ -219,3 +219,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/home/darklord/.bun/_bun" ] && source "/home/darklord/.bun/_bun"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# open file using fzf
+alias nf='nvim $(fzf)'
+alias nfh='nvim $(find . | fzf)'
