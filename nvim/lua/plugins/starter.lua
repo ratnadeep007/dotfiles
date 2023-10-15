@@ -453,7 +453,7 @@ return {
           copy = gruvbox_colors.yellow_dark,
           delete = gruvbox_colors.red_dark,
           insert = gruvbox_colors.green_dark,
-          visual = gruvbox_colors.gray_2,
+          visual = gruvbox_colors.blue_dark,
         },
         -- line_opacity = 0.15,
         set_cursor = true,
@@ -714,5 +714,22 @@ return {
   {
     "vimlab/split-term.vim",
     lazy = false,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    lazy = false,
+  },
+  {
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+    },
+    config = function()
+      require("barbecue").setup({
+        create_autocmd = false,
+      })
+    end,
   },
 }
