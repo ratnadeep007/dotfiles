@@ -3,6 +3,15 @@
 -- if true then return {} end
 --
 
+vim.env.NEOVIM_NODE_VERSION = 'v18.17.0'
+
+if vim.fn.has("unix") and vim.env.NEOVIM_NODE_VERSION then
+  local node_dir = vim.env.HOME .. "/.nvm/versions/node" .. vim.env.NEOVIM_NODE_VERSION .. "/bin/"
+  if vim.fn.isdirectory(node_dir) then
+    vim.env.PATH = node_dir .. ":" .. vim.env.PATH
+  end
+end
+
 -- require for folding
 
 -- vim.cmd([[hi FoldColumn guibg=green guifg=LightGray ctermbg=black ctermfg=LightGray]])
@@ -751,5 +760,14 @@ return {
   -- },
   {
     "mg979/vim-visual-multi",
+  },
+  {
+    "rmagatti/auto-session",
+    config = function()
+      require("auto-session").setup({
+        log_level = "error",
+        auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+      })
+    end,
   },
 }
