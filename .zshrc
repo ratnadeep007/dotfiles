@@ -161,10 +161,11 @@ fi
 #
 # To initialize zoxide, add this to your configuration (usually ~/.zshrc):
 #
-# eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh)"
 
 # alias tmux to tn to name session as folder name
 alias tn="tmux -u new -s \$(pwd | sed 's/.*\///g')"
+alias ts="tmux -u new -s"
 
 # export t-session-manager to path
 export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
@@ -202,13 +203,9 @@ zvm_before_init() {
   local ncur=$(zvm_cursor_style $ZVM_NORMAL_MODE_CURSOR)
   local icur=$(zvm_cursor_style $ZVM_INSERT_MODE_CURSOR)
 
-  # Dracula themed
-  # ZVM_INSERT_MODE_CURSOR=$ncur'\e\e]12;#50fa7b\a'
-  # ZVM_NORMAL_MODE_CURSOR=$ncur'\e\e]12;#f8f8f2\a'
-  
-  # Gruvbox
-  ZVM_INSERT_MODE_CURSOR=$ncur'\e\e]12;#b8bb26\a'
-  ZVM_NORMAL_MODE_CURSOR=$ncur'\e\e]12;#fbf1c7\a'
+  # TokyoNight
+  ZVM_INSERT_MODE_CURSOR=$ncur'\e\e]12;#1abc9c\a'
+  ZVM_NORMAL_MODE_CURSOR=$ncur'\e\e]12;#394b70\a'
 }
 
 export NVM_DIR="$HOME/.nvm"

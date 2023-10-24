@@ -161,6 +161,12 @@ local gruvbox_colors = {
 -- * override the configuration of LazyVim plugins
 return {
   -- add gruvbox
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
   { "ellisonleao/gruvbox.nvim" },
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
@@ -176,7 +182,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox",
+      colorscheme = "tokyonight-night",
     },
   },
 
@@ -336,7 +342,7 @@ return {
 
       return {
         options = {
-          theme = "gruvbox",
+          theme = "tokyonight",
           disable_filetypes = { statusline = { "dashboard", "alpha" } },
         },
         sections = {
@@ -459,10 +465,10 @@ return {
     config = function()
       require("modes").setup({
         colors = {
-          copy = gruvbox_colors.yellow_dark,
-          delete = gruvbox_colors.red_dark,
-          insert = gruvbox_colors.green_dark,
-          visual = gruvbox_colors.blue_dark,
+          copy = "#7dcfff",
+          delete = "#f7768e",
+          insert = "#1abc9c",
+          visual = "#7aa2f7",
         },
         -- line_opacity = 0.15,
         set_cursor = true,
