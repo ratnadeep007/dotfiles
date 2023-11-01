@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=WezTerm
+Comment=Wez's Terminal Emulator
+Keywords=shell;prompt;command;commandline;cmd;
+Icon=/home/darklord/.local/share/applications/org.wezfurlong.wezterm.png
+StartupWMClass=org.wezfurlong.wezterm
+TryExec=wezterm
+Exec=wezterm start --cwd .
+Type=Application
+Categories=System;TerminalEmulator;Utility;
+Terminal=false
+X-AppImage-Version=20230712-072601-f4abf8fd
