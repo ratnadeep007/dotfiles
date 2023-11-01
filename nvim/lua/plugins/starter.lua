@@ -24,7 +24,7 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
   local newVirtText = {}
   local totalLines = vim.api.nvim_buf_line_count(0)
   local foldedLines = endLnum - lnum
-  local suffix = ("󰁂  %d %d%%"):format(foldedLines, foldedLines / totalLines * 100)
+  local suffix = (" [+] %d lines -> %d%%"):format(foldedLines, foldedLines / totalLines * 100)
   local sufWidth = vim.fn.strdisplaywidth(suffix)
   local targetWidth = width - sufWidth
   local curWidth = 0
@@ -713,6 +713,23 @@ return {
     "tpope/vim-dadbod",
   },
   {
+    "kristijanhusak/vim-dadbod-ui",
+    dependencies = {
+      { "tpope/vim-dadbod", lazy = true },
+      { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
+    },
+    cmd = {
+      "DBUI",
+      "DBUIToggle",
+      "DBUIAddConnection",
+      "DBUIFindBuffer",
+    },
+    init = function()
+      -- Your DBUI configuration
+      vim.g.db_ui_use_nerd_fonts = 1
+    end,
+  },
+  {
     "sindrets/diffview.nvim",
     lazy = false,
     keys = {
@@ -730,10 +747,11 @@ return {
     "vimlab/split-term.vim",
     lazy = false,
   },
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    lazy = false,
-  },
+  -- {
+  --   "nvim-treesitter/nvim-treesitter-context",
+  --   lazy = false,
+  --   enable = false,
+  -- },
   {
     "utilyre/barbecue.nvim",
     name = "barbecue",
@@ -773,6 +791,69 @@ return {
       require("auto-session").setup({
         log_level = "error",
         auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+      })
+    end,
+  },
+  {
+    "Vonr/align.nvim",
+    branch = "v2",
+    lazy = true,
+    init = function()
+      local NS = { noremap = true, silent = true }
+
+      -- Aligns to 1 character
+      vim.keymap.set("x", "aa", function()
+        require("align").align_to_char({
+          length = 1,
+        })
+      end, NS)
+
+      -- Aligns to 2 characters with previews
+      vim.keymap.set("x", "ad", function()
+        require("align").align_to_char({
+          preview = true,
+          length = 2,
+        })
+      end, NS)
+
+      -- Aligns to a string with previews
+      vim.keymap.set("x", "aw", function()
+        require("align").align_to_string({
+          preview = true,
+          regex = false,
+        })
+      end, NS)
+
+      -- Aligns to a Vim regex with previews
+      vim.keymap.set("x", "ar", function()
+        require("align").align_to_string({
+          preview = true,
+          regex = true,
+        })
+      end, NS)
+
+      -- Example gawip to align a paragraph to a string with previews
+      vim.keymap.set("n", "gaw", function()
+        local a = require("align")
+        a.operator(a.align_to_string, {
+          regex = false,
+          preview = true,
+        })
+      end, NS)
+
+      -- Example gaaip to align a paragraph to 1 character
+      vim.keymap.set("n", "gaa", function()
+        local a = require("align")
+        a.operator(a.align_to_char)
+      end, NS)
+    end,
+  },
+  {
+    "Pocco81/auto-save.nvim",
+    config = function()
+      require("auto-save").setup({
+        -- your config goes here
+        -- or just leave it empty :)
       })
     end,
   },
