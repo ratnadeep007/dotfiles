@@ -218,7 +218,6 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # open file using fzf
-alias nf='nvim $(fzf --preview "bat -n --color=always {}")'
-alias nfh='nvim $(find . | fzf  --preview "bat -n --color=always {}")'
+alias nf='nvim $(find . -type f | fzf  --preview "bat -n --color=always {}")'
 
 zstyle ':autocomplete:*' default-context history-incremental-search-backward
