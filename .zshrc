@@ -219,5 +219,6 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # open file using fzf
 alias nf='nvim $(find . -type f | fzf  --preview "bat -n --color=always {}")'
+alias nd='nvim $(find . -type d | fzf  --preview "bat -n --color=always {}")'
 
 zstyle ':autocomplete:*' default-context history-incremental-search-backward
