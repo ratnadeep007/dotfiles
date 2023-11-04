@@ -857,7 +857,4 @@ return {
   --     })
   --   end,
   -- },
-  {
-    "junegunn/fzf.vim",
-  },
 }
