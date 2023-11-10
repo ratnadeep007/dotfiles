@@ -484,7 +484,7 @@ return {
       {
         "<leader>fe",
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = require("lazyvim.util").get_root() })
+          require("neo-tree.command").execute({ toggle = true, dir = require("lazyvim.util").root.get() })
         end,
         desc = "Explorer NeoTree (root dir)",
       },
@@ -747,11 +747,11 @@ return {
     "vimlab/split-term.vim",
     lazy = false,
   },
-  -- {
-  --   "nvim-treesitter/nvim-treesitter-context",
-  --   lazy = false,
-  --   enable = false,
-  -- },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    lazy = false,
+    enabled = false,
+  },
   {
     "utilyre/barbecue.nvim",
     name = "barbecue",
@@ -765,23 +765,23 @@ return {
       })
     end,
   },
-  {
-    "smoka7/multicursors.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "smoka7/hydra.nvim",
-    },
-    opts = {},
-    cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
-    keys = {
-      {
-        mode = { "v", "n" },
-        "<Leader>m",
-        "<cmd>MCstart<cr>",
-        desc = "Create a selection for selected text or word under the cursor",
-      },
-    },
-  },
+  -- {
+  --   "smoka7/multicursors.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     "smoka7/hydra.nvim",
+  --   },
+  --   opts = {},
+  --   cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
+  --   keys = {
+  --     {
+  --       mode = { "v", "n" },
+  --       "<Leader>m",
+  --       "<cmd>MCstart<cr>",
+  --       desc = "Create a selection for selected text or word under the cursor",
+  --     },
+  --   },
+  -- },
   -- {
   --   "mg979/vim-visual-multi",
   -- },
