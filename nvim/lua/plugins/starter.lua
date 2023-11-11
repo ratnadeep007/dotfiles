@@ -340,6 +340,10 @@ return {
       local icons = require("lazyvim.config").icons
       local Util = require("lazyvim.util")
 
+      -- get maximize info
+      local function maximize_status()
+        return vim.t.maximized and "   " or ""
+      end
       return {
         options = {
           theme = "tokyonight",
@@ -348,7 +352,7 @@ return {
         sections = {
           lualine_a = { "mode" },
           lualine_b = { "branch", "diff", "diagnostics" },
-          lualine_c = { "filename", lsp },
+          lualine_c = { "filename", lsp, maximize_status },
           lualine_x = { "encoding", "fileformat", "filetype" },
           lualine_y = { "progress" },
           lualine_z = { "location" },
@@ -857,4 +861,10 @@ return {
   --     })
   --   end,
   -- },
+  {
+    "declancm/maximize.nvim",
+    config = function()
+      require("maximize").setup()
+    end,
+  },
 }
