@@ -20,6 +20,22 @@ end
 -- config.color_scheme = "Dracula (Official)"
 -- config.font = wezterm.font("Cascadia Code PL")
 -- config.font = wezterm.font("Fira Code")
+config.font = wezterm.font({
+	family = "Monaspace Argon",
+	weight = "Medium",
+	harfbuzz_features = {
+		"ss01=1",
+		"ss02=1",
+		"ss03=1",
+		"ss04=1",
+		"ss05=1",
+		"ss06=1",
+		"ss07=1",
+		"ss08=1",
+		"calt=1",
+		"dlig=1",
+	},
+})
 config.color_scheme = "Tokyo Night"
 config.window_background_opacity = 2.0
 config.enable_wayland = true
