@@ -48,7 +48,7 @@ style = "bold #bd93f9"
 format = "[$user]($style) on "
 style_user = "bold #8be9fd"
 
-[time]
-disabled = false
-use_12hr = true
-format = '[\[ $time \]]($style) '
+# [time]
+# disabled = false
+# use_12hr = true
+# format = '[\[ $time \]]($style) '

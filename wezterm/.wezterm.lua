@@ -21,8 +21,7 @@ end
 -- config.font = wezterm.font("Cascadia Code PL")
 -- config.font = wezterm.font("Fira Code")
 config.font = wezterm.font({
-	family = "Monaspace Argon",
-	weight = "Medium",
+	family = "Monaspace Neon",
 	harfbuzz_features = {
 		"ss01=1",
 		"ss02=1",
