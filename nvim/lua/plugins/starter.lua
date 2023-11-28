@@ -923,4 +923,17 @@ return {
       end,
     },
   },
+  { "f-person/git-blame.nvim" },
+  {
+    "AckslD/nvim-neoclip.lua",
+    config = function()
+      require("neoclip").setup()
+      vim.keymap.set(
+        "n",
+        "<leader>tc",
+        "<cmd>Telescope neoclip<cr>",
+        { desc = "Open Telescope neoclicope neoclicope neoclip" }
+      )
+    end,
+  },
 }
