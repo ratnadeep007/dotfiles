@@ -330,7 +330,9 @@ return {
       })
     end,
   },
-  -- { "arkav/lualine-lsp-progress" },
+  {
+    "arkav/lualine-lsp-progress",
+  },
   { "nvim-lua/lsp-status.nvim" },
   -- the opts function can also be used to change the default opts:
   {
@@ -352,7 +354,7 @@ return {
         sections = {
           lualine_a = { "mode" },
           lualine_b = { "branch", "diff", "diagnostics" },
-          lualine_c = { "filename", lsp, maximize_status },
+          lualine_c = { "filename", lsp, "lsp_progress", maximize_status },
           lualine_x = { "encoding", "fileformat", "filetype" },
           lualine_y = { "progress" },
           lualine_z = { "location" },
@@ -364,17 +366,6 @@ return {
       }
     end,
   },
-
-  -- or you can return new options to override all the defaults
-  -- {
-  --   "nvim-lualine/lualine.nvim",
-  --   event = "VeryLazy",
-  --   opts = function()
-  --     return {
-  --       --[[add your custom lualine config here]]
-  --     }
-  --   end,
-  -- },
 
   -- use mini.starter instead of alpha
   -- { import = "lazyvim.plugins.extras.ui.mini-starter" },
@@ -603,7 +594,7 @@ return {
         -- you can enable a preset for easier configuration
         presets = {
           bottom_search = true, -- use a classic bottom cmdline for search
-          command_palette = true, -- position the cmdline and popupmenu together
+          command_palette = false, -- position the cmdline and popupmenu together
           long_message_to_split = true, -- long messages will be sent to a split
           inc_rename = false, -- enables an input dialog for inc-rename.nvim
           lsp_doc_border = true, -- add a border to hover docs and signature help
