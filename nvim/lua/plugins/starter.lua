@@ -871,6 +871,7 @@ return {
             config = {
               workspaces = {
                 notes = "~/notes",
+                ideas = "~/ideas-org",
               },
             },
           },
