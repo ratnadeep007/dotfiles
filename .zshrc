@@ -216,3 +216,8 @@ zstyle ':autocomplete:*' default-context history-incremental-search-backward
 
 alias vi="nvim"
 export PATH="$PATH:/home/darklord/.platformio/penv/bin"
+
+alias ls="eza --icons"
+alias ll="eza --icons -alh"
+alias tree="eza --icons --tree"
+alias trea="eza --icons --tree -alh"
