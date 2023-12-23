@@ -615,6 +615,14 @@ return {
           inc_rename = false, -- enables an input dialog for inc-rename.nvim
           lsp_doc_border = true, -- add a border to hover docs and signature help
         },
+        views = {
+          mini = {
+            position = {
+              row = -2,
+              col = "100%",
+            },
+          },
+        },
       })
     end,
   },
@@ -638,7 +646,6 @@ return {
     config = function()
       require("oil").setup({
         default_file_explorer = true,
-        win_options = "yes:2",
         view_options = {
           show_hidden_files = true,
         },
@@ -983,4 +990,10 @@ return {
       )
     end,
   },
+  -- {
+  --   "j-hui/fidget.nvim",
+  --   opts = {
+  --     -- options
+  --   },
+  -- },
 }
