@@ -22,6 +22,7 @@ end
 -- config.font = wezterm.font("Fira Code")
 config.font = wezterm.font({
 	family = "Monaspace Neon",
+	weight = "Medium",
 	harfbuzz_features = {
 		"ss01=1",
 		"ss02=1",
@@ -42,6 +43,7 @@ config.hide_tab_bar_if_only_one_tab = true
 config.enable_tab_bar = false
 config.font_size = 15
 config.adjust_window_size_when_changing_font_size = false
+config.line_height = 1.5
 -- config.font = wezterm.font("Comic Shanns Mono", { weight = "Regular"})
 
 -- and finally, return the configuration to wezterm
