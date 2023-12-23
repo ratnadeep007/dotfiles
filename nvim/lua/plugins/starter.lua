@@ -97,6 +97,18 @@ local lsp = {
   color = { gui = "bold" },
 }
 
+-- diff for lua line
+local function diff_source()
+  local gitsigns = vim.b.gitsigns_status_dict
+  if gitsigns then
+    return {
+      added = gitsigns.added,
+      modified = gitsigns.changed,
+      removed = gitsigns.removed,
+    }
+  end
+end
+
 local colors = {
   cyan = "#79dac8",
   black = "#080808",
@@ -194,7 +206,7 @@ return {
   },
 
   -- disable trouble
-  { "folke/trouble.nvim", enabled = false },
+  -- { "folke/trouble.nvim", enabled = false },
 
   -- add symbols-outline
   {
@@ -331,11 +343,6 @@ return {
     end,
   },
   {
-    "arkav/lualine-lsp-progress",
-  },
-  { "nvim-lua/lsp-status.nvim" },
-  -- the opts function can also be used to change the default opts:
-  {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function(_, opts)
@@ -353,9 +360,14 @@ return {
         },
         sections = {
           lualine_a = { "mode" },
-          lualine_b = { "branch", "diff", "diagnostics" },
-          lualine_c = { "filename", lsp, "lsp_progress", maximize_status },
-          lualine_x = { "encoding", "fileformat", "filetype" },
+          lualine_b = { "branch", { "diff", colored = true, source = diff_source }, "diagnostics" },
+          lualine_c = { "filename", lsp, maximize_status },
+          lualine_x = {
+            -- { "diff", colored = true, source = diff_source },
+            "encoding",
+            "fileformat",
+            "filetype",
+          },
           lualine_y = { "progress" },
           lualine_z = { "location" },
         },
@@ -475,6 +487,7 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     cmd = "Neotree",
+    enabled = false,
     keys = {
       {
         "<leader>fe",
@@ -565,23 +578,26 @@ return {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    enabled = false,
+    enabled = true,
     opts = {
       -- add any options here
     },
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      -- "MunifTanjim/nui.nvim",
+      "MunifTanjim/nui.nvim",
       -- OPTIONAL:
       --   `nvim-notify` is only needed, if you want to use the notification view.
       --   If not available, we use `mini` as the fallback
-      -- "rcarriga/nvim-notify",
+      "rcarriga/nvim-notify",
     },
     config = function()
       require("noice").setup({
         cmdline = {
-          enabled = true,
+          enabled = false,
           view = "cmdline",
+        },
+        messages = {
+          enabled = false,
         },
         lsp = {
           -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -617,10 +633,20 @@ return {
   },
   {
     "stevearc/oil.nvim",
-    opts = {},
+    lazy = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("oil").setup({
+        default_file_explorer = true,
+        win_options = "yes:2",
+        view_options = {
+          show_hidden_files = true,
+        },
+      })
+    end,
     keys = {
-      { "<leader>o", "<cmd>Oil<cr>", desc = "Oil" },
+      { "<leader>o", "<cmd>Oil --float<cr>", desc = "Open Oil Float" },
+      { "<leader>e", "<cmd>Oil --float<cr>", desc = "Open Oil Float", remap = true },
     },
   },
   -- {
@@ -735,7 +761,24 @@ return {
   {
     "gelguy/wilder.nvim",
     config = function()
-      require("wilder").setup({ modes = { ":", "/", "?" } })
+      local wilder = require("wilder")
+      wilder.setup({ modes = { ":", "/", "?" } })
+      wilder.set_option(
+        "renderer",
+        wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
+          highlights = {
+            border = "Normal", -- highlight to use for the border
+          },
+          -- 'single', 'double', 'rounded' or 'solid'
+          -- can also be a list of 8 characters, see :h wilder#popupmenu_border_theme() for more details
+          border = "rounded",
+        })),
+        wilder.popupmenu_renderer({
+          highlighter = wilder.basic_highlighter(),
+          left = { " ", wilder.popupmenu_devicons() },
+          right = { " ", wilder.popupmenu_scrollbar() },
+        })
+      )
     end,
   },
   {
@@ -777,9 +820,10 @@ return {
   --     },
   --   },
   -- },
-  -- {
-  --   "mg979/vim-visual-multi",
-  -- },
+  {
+    "mg979/vim-visual-multi",
+    p,
+  },
   {
     "rmagatti/auto-session",
     config = function()
@@ -925,6 +969,17 @@ return {
         "<leader>tc",
         "<cmd>Telescope neoclip<cr>",
         { desc = "Open Telescope neoclicope neoclicope neoclip" }
+      )
+    end,
+  },
+  {
+    "aznhe21/actions-preview.nvim",
+    config = function()
+      vim.keymap.set(
+        { "v", "n" },
+        "<leader>ca",
+        require("actions-preview").code_actions,
+        { desc = "Code Actions with diff" }
       )
     end,
   },
