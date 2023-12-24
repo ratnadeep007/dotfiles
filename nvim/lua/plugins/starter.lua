@@ -996,4 +996,12 @@ return {
   --     -- options
   --   },
   -- },
+  {
+    "rmagatti/goto-preview",
+    opts = {
+      default_mappings = true,
+    },
+    config = true,
+  },
+  { "kevinhwang91/nvim-bqf" },
 }
