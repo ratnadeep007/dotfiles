@@ -165,6 +165,8 @@ local gruvbox_colors = {
   aqua_light = "#8ec07c",
 }
 
+vim.cmd([[au BufNewFile,BufRead *.v set filetype=vlang]])
+
 -- every spec file under config.plugins will be loaded automatically by lazy.nvim
 --
 -- In your plugin files, you can:

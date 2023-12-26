@@ -20,9 +20,10 @@ end
 -- config.color_scheme = "Dracula (Official)"
 -- config.font = wezterm.font("Cascadia Code PL")
 -- config.font = wezterm.font("Fira Code")
+-- config.font = wezterm.font("Iosevka Term", { weight = "Medium", stretch = "Normal", style = "Normal" })
 config.font = wezterm.font({
 	family = "Monaspace Neon",
-	weight = "Medium",
+	weight = "Regular",
 	harfbuzz_features = {
 		"ss01=1",
 		"ss02=1",
