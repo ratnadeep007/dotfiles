@@ -24,7 +24,7 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
   local newVirtText = {}
   local totalLines = vim.api.nvim_buf_line_count(0)
   local foldedLines = endLnum - lnum
-  local suffix = ("󰁂  %d %d%%"):format(foldedLines, foldedLines / totalLines * 100)
+  local suffix = (" [+] %d lines -> %d%%"):format(foldedLines, foldedLines / totalLines * 100)
   local sufWidth = vim.fn.strdisplaywidth(suffix)
   local targetWidth = width - sufWidth
   local curWidth = 0
@@ -97,6 +97,18 @@ local lsp = {
   color = { gui = "bold" },
 }
 
+-- diff for lua line
+local function diff_source()
+  local gitsigns = vim.b.gitsigns_status_dict
+  if gitsigns then
+    return {
+      added = gitsigns.added,
+      modified = gitsigns.changed,
+      removed = gitsigns.removed,
+    }
+  end
+end
+
 local colors = {
   cyan = "#79dac8",
   black = "#080808",
@@ -153,6 +165,8 @@ local gruvbox_colors = {
   aqua_light = "#8ec07c",
 }
 
+vim.cmd([[au BufNewFile,BufRead *.v set filetype=vlang]])
+
 -- every spec file under config.plugins will be loaded automatically by lazy.nvim
 --
 -- In your plugin files, you can:
@@ -161,6 +175,12 @@ local gruvbox_colors = {
 -- * override the configuration of LazyVim plugins
 return {
   -- add gruvbox
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
   { "ellisonleao/gruvbox.nvim" },
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
@@ -176,7 +196,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox",
+      colorscheme = "tokyonight-night",
     },
   },
 
@@ -188,7 +208,7 @@ return {
   },
 
   -- disable trouble
-  { "folke/trouble.nvim", enabled = false },
+  -- { "folke/trouble.nvim", enabled = false },
 
   -- add symbols-outline
   {
@@ -251,7 +271,7 @@ return {
     dependencies = {
       "jose-elias-alvarez/typescript.nvim",
       init = function()
-        require("lazyvim.util").on_attach(function(_, buffer)
+        require("lazyvim.util").lsp.on_attach(function(_, buffer)
           -- stylua: ignore
           vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
           vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
@@ -324,9 +344,6 @@ return {
       })
     end,
   },
-  -- { "arkav/lualine-lsp-progress" },
-  { "nvim-lua/lsp-status.nvim" },
-  -- the opts function can also be used to change the default opts:
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
@@ -334,16 +351,25 @@ return {
       local icons = require("lazyvim.config").icons
       local Util = require("lazyvim.util")
 
+      -- get maximize info
+      local function maximize_status()
+        return vim.t.maximized and "   " or ""
+      end
       return {
         options = {
-          theme = "gruvbox",
+          theme = "tokyonight",
           disable_filetypes = { statusline = { "dashboard", "alpha" } },
         },
         sections = {
           lualine_a = { "mode" },
-          lualine_b = { "branch", "diff", "diagnostics" },
-          lualine_c = { "filename", lsp },
-          lualine_x = { "encoding", "fileformat", "filetype" },
+          lualine_b = { "branch", { "diff", colored = true, source = diff_source }, "diagnostics" },
+          lualine_c = { "filename", lsp, maximize_status },
+          lualine_x = {
+            -- { "diff", colored = true, source = diff_source },
+            "encoding",
+            "fileformat",
+            "filetype",
+          },
           lualine_y = { "progress" },
           lualine_z = { "location" },
         },
@@ -354,17 +380,6 @@ return {
       }
     end,
   },
-
-  -- or you can return new options to override all the defaults
-  -- {
-  --   "nvim-lualine/lualine.nvim",
-  --   event = "VeryLazy",
-  --   opts = function()
-  --     return {
-  --       --[[add your custom lualine config here]]
-  --     }
-  --   end,
-  -- },
 
   -- use mini.starter instead of alpha
   -- { import = "lazyvim.plugins.extras.ui.mini-starter" },
@@ -459,10 +474,10 @@ return {
     config = function()
       require("modes").setup({
         colors = {
-          copy = gruvbox_colors.yellow_dark,
-          delete = gruvbox_colors.red_dark,
-          insert = gruvbox_colors.green_dark,
-          visual = gruvbox_colors.blue_dark,
+          copy = "#7dcfff",
+          delete = "#f7768e",
+          insert = "#1abc9c",
+          visual = "#7aa2f7",
         },
         -- line_opacity = 0.15,
         set_cursor = true,
@@ -474,11 +489,12 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     cmd = "Neotree",
+    enabled = false,
     keys = {
       {
         "<leader>fe",
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = require("lazyvim.util").get_root() })
+          require("neo-tree.command").execute({ toggle = true, dir = require("lazyvim.util").root.get() })
         end,
         desc = "Explorer NeoTree (root dir)",
       },
@@ -564,23 +580,26 @@ return {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    enabled = false,
+    enabled = true,
     opts = {
       -- add any options here
     },
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      -- "MunifTanjim/nui.nvim",
+      "MunifTanjim/nui.nvim",
       -- OPTIONAL:
       --   `nvim-notify` is only needed, if you want to use the notification view.
       --   If not available, we use `mini` as the fallback
-      -- "rcarriga/nvim-notify",
+      "rcarriga/nvim-notify",
     },
     config = function()
       require("noice").setup({
         cmdline = {
-          enabled = true,
+          enabled = false,
           view = "cmdline",
+        },
+        messages = {
+          enabled = false,
         },
         lsp = {
           -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -593,10 +612,18 @@ return {
         -- you can enable a preset for easier configuration
         presets = {
           bottom_search = true, -- use a classic bottom cmdline for search
-          command_palette = true, -- position the cmdline and popupmenu together
+          command_palette = false, -- position the cmdline and popupmenu together
           long_message_to_split = true, -- long messages will be sent to a split
           inc_rename = false, -- enables an input dialog for inc-rename.nvim
           lsp_doc_border = true, -- add a border to hover docs and signature help
+        },
+        views = {
+          mini = {
+            position = {
+              row = -2,
+              col = "100%",
+            },
+          },
         },
       })
     end,
@@ -616,10 +643,19 @@ return {
   },
   {
     "stevearc/oil.nvim",
-    opts = {},
+    lazy = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("oil").setup({
+        default_file_explorer = true,
+        view_options = {
+          show_hidden_files = true,
+        },
+      })
+    end,
     keys = {
-      { "<leader>o", "<cmd>Oil<cr>", desc = "Oil" },
+      { "<leader>o", "<cmd>Oil --float<cr>", desc = "Open Oil Float" },
+      { "<leader>e", "<cmd>Oil --float<cr>", desc = "Open Oil Float", remap = true },
     },
   },
   -- {
@@ -707,6 +743,23 @@ return {
     "tpope/vim-dadbod",
   },
   {
+    "kristijanhusak/vim-dadbod-ui",
+    dependencies = {
+      { "tpope/vim-dadbod", lazy = true },
+      { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
+    },
+    cmd = {
+      "DBUI",
+      "DBUIToggle",
+      "DBUIAddConnection",
+      "DBUIFindBuffer",
+    },
+    init = function()
+      -- Your DBUI configuration
+      vim.g.db_ui_use_nerd_fonts = 1
+    end,
+  },
+  {
     "sindrets/diffview.nvim",
     lazy = false,
     keys = {
@@ -717,7 +770,24 @@ return {
   {
     "gelguy/wilder.nvim",
     config = function()
-      require("wilder").setup({ modes = { ":", "/", "?" } })
+      local wilder = require("wilder")
+      wilder.setup({ modes = { ":", "/", "?" } })
+      wilder.set_option(
+        "renderer",
+        wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
+          highlights = {
+            border = "Normal", -- highlight to use for the border
+          },
+          -- 'single', 'double', 'rounded' or 'solid'
+          -- can also be a list of 8 characters, see :h wilder#popupmenu_border_theme() for more details
+          border = "rounded",
+        })),
+        wilder.popupmenu_renderer({
+          highlighter = wilder.basic_highlighter(),
+          left = { " ", wilder.popupmenu_devicons() },
+          right = { " ", wilder.popupmenu_scrollbar() },
+        })
+      )
     end,
   },
   {
@@ -727,6 +797,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-context",
     lazy = false,
+    enabled = false,
   },
   {
     "utilyre/barbecue.nvim",
@@ -760,6 +831,7 @@ return {
   -- },
   {
     "mg979/vim-visual-multi",
+    p,
   },
   {
     "rmagatti/auto-session",
@@ -770,4 +842,168 @@ return {
       })
     end,
   },
+  {
+    "Vonr/align.nvim",
+    branch = "v2",
+    lazy = true,
+    init = function()
+      local NS = { noremap = true, silent = true }
+
+      -- Aligns to 1 character
+      vim.keymap.set("x", "aa", function()
+        require("align").align_to_char({
+          length = 1,
+        })
+      end, NS)
+
+      -- Aligns to 2 characters with previews
+      vim.keymap.set("x", "ad", function()
+        require("align").align_to_char({
+          preview = true,
+          length = 2,
+        })
+      end, NS)
+
+      -- Aligns to a string with previews
+      vim.keymap.set("x", "aw", function()
+        require("align").align_to_string({
+          preview = true,
+          regex = false,
+        })
+      end, NS)
+
+      -- Aligns to a Vim regex with previews
+      vim.keymap.set("x", "ar", function()
+        require("align").align_to_string({
+          preview = true,
+          regex = true,
+        })
+      end, NS)
+
+      -- Example gawip to align a paragraph to a string with previews
+      vim.keymap.set("n", "gaw", function()
+        local a = require("align")
+        a.operator(a.align_to_string, {
+          regex = false,
+          preview = true,
+        })
+      end, NS)
+
+      -- Example gaaip to align a paragraph to 1 character
+      vim.keymap.set("n", "gaa", function()
+        local a = require("align")
+        a.operator(a.align_to_char)
+      end, NS)
+    end,
+  },
+  -- {
+  --   "Pocco81/auto-save.nvim",
+  --   config = function()
+  --     require("auto-save").setup({
+  --       -- your config goes here
+  --       -- or just leave it empty :)
+  --     })
+  --   end,
+  -- },
+  {
+    "declancm/maximize.nvim",
+    config = function()
+      require("maximize").setup()
+    end,
+  },
+  {
+    "nvim-neorg/neorg",
+    build = ":Neorg sync-parsers",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("neorg").setup({
+        load = {
+          ["core.defaults"] = {}, -- Loads default behaviour
+          ["core.concealer"] = {}, -- Adds pretty icons to your documents
+          ["core.dirman"] = { -- Manages Neorg workspaces
+            config = {
+              workspaces = {
+                notes = "~/notes",
+                ideas = "~/ideas-org",
+              },
+            },
+          },
+        },
+      })
+    end,
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    event = "LazyFile",
+    opts = {
+      signs = {
+        -- add = { text = "▎" },
+        add = { text = " 󰐖" },
+        change = { text = " " },
+        delete = { text = " " },
+        topdelete = { text = "" },
+        changedelete = { text = "▎" },
+        untracked = { text = "▎" },
+      },
+      on_attach = function(buffer)
+        local gs = package.loaded.gitsigns
+
+        local function map(mode, l, r, desc)
+          vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
+        end
+
+      -- stylua: ignore start
+      map("n", "]h", gs.next_hunk, "Next Hunk")
+      map("n", "[h", gs.prev_hunk, "Prev Hunk")
+      map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
+      map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+      map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
+      map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
+      map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
+      map("n", "<leader>ghp", gs.preview_hunk, "Preview Hunk")
+      map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
+      map("n", "<leader>ghd", gs.diffthis, "Diff This")
+      map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
+      map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+      end,
+    },
+  },
+  { "f-person/git-blame.nvim" },
+  {
+    "AckslD/nvim-neoclip.lua",
+    config = function()
+      require("neoclip").setup()
+      vim.keymap.set(
+        "n",
+        "<leader>tc",
+        "<cmd>Telescope neoclip<cr>",
+        { desc = "Open Telescope neoclicope neoclicope neoclip" }
+      )
+    end,
+  },
+  {
+    "aznhe21/actions-preview.nvim",
+    config = function()
+      vim.keymap.set(
+        { "v", "n" },
+        "<leader>ca",
+        require("actions-preview").code_actions,
+        { desc = "Code Actions with diff" }
+      )
+    end,
+  },
+  -- {
+  --   "j-hui/fidget.nvim",
+  --   opts = {
+  --     -- options
+  --   },
+  -- },
+  {
+    "rmagatti/goto-preview",
+    opts = {
+      default_mappings = true,
+    },
+    config = true,
+  },
+  { "kevinhwang91/nvim-bqf" },
 }

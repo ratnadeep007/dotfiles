@@ -20,13 +20,31 @@ end
 -- config.color_scheme = "Dracula (Official)"
 -- config.font = wezterm.font("Cascadia Code PL")
 -- config.font = wezterm.font("Fira Code")
-config.color_scheme = "Gruvbox Dark (Gogh)"
+-- config.font = wezterm.font("Iosevka Term", { weight = "Medium", stretch = "Normal", style = "Normal" })
+config.font = wezterm.font({
+	family = "Monaspace Neon",
+	weight = "Regular",
+	harfbuzz_features = {
+		"ss01=1",
+		"ss02=1",
+		"ss03=1",
+		"ss04=1",
+		"ss05=1",
+		"ss06=1",
+		"ss07=1",
+		"ss08=1",
+		"calt=1",
+		"dlig=1",
+	},
+})
+config.color_scheme = "Tokyo Night"
 config.window_background_opacity = 2.0
 config.enable_wayland = true
 config.hide_tab_bar_if_only_one_tab = true
 config.enable_tab_bar = false
 config.font_size = 15
 config.adjust_window_size_when_changing_font_size = false
+config.line_height = 1.5
 -- config.font = wezterm.font("Comic Shanns Mono", { weight = "Regular"})
 
 -- and finally, return the configuration to wezterm

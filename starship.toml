@@ -47,3 +47,8 @@ style = "bold #bd93f9"
 [username]
 format = "[$user]($style) on "
 style_user = "bold #8be9fd"
+
+# [time]
+# disabled = false
+# use_12hr = true
+# format = '[\[ $time \]]($style) '

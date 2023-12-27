@@ -33,6 +33,7 @@ Things which should be installed:
 ## Themes
 - Gruvbox
 - Dracula
+- Tokyo Night (*)
 
 ### Things or ideas
 - Add script to install required tools using gum

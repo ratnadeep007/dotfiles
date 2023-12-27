@@ -1,15 +1,11 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 
 # Created by Zap installer
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 plug "zsh-users/zsh-autosuggestions"
 plug "zap-zsh/supercharge"
-plug "zap-zsh/exa"
 plug "zap-zsh/zap-prompt"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "jeffreytse/zsh-vi-mode"
@@ -23,11 +19,6 @@ compinit
 
 # source catpuccin theme
 # source ~/.zsh/catppuccin_mocha.zsh
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 # volta
 export VOLTA_HOME="$HOME/.volta"
@@ -161,10 +152,11 @@ fi
 #
 # To initialize zoxide, add this to your configuration (usually ~/.zshrc):
 #
-# eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh)"
 
 # alias tmux to tn to name session as folder name
 alias tn="tmux -u new -s \$(pwd | sed 's/.*\///g')"
+alias ts="tmux -u new -s"
 
 # export t-session-manager to path
 export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
@@ -202,13 +194,9 @@ zvm_before_init() {
   local ncur=$(zvm_cursor_style $ZVM_NORMAL_MODE_CURSOR)
   local icur=$(zvm_cursor_style $ZVM_INSERT_MODE_CURSOR)
 
-  # Dracula themed
-  # ZVM_INSERT_MODE_CURSOR=$ncur'\e\e]12;#50fa7b\a'
-  # ZVM_NORMAL_MODE_CURSOR=$ncur'\e\e]12;#f8f8f2\a'
-  
-  # Gruvbox
-  ZVM_INSERT_MODE_CURSOR=$ncur'\e\e]12;#b8bb26\a'
-  ZVM_NORMAL_MODE_CURSOR=$ncur'\e\e]12;#fbf1c7\a'
+  # TokyoNight
+  ZVM_INSERT_MODE_CURSOR=$ncur'\e\e]12;#1abc9c\a'
+  ZVM_NORMAL_MODE_CURSOR=$ncur'\e\e]12;#394b70\a'
 }
 
 export NVM_DIR="$HOME/.nvm"
@@ -221,7 +209,15 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # open file using fzf
-alias nf='nvim $(fzf --preview "bat -n --color=always {}")'
-alias nfh='nvim $(find . | fzf  --preview "bat -n --color=always {}")'
+alias nf='nvim $(find . -type f | fzf  --preview "bat -n --color=always {}")'
+alias nd='nvim $(find . -type d | fzf  --preview "bat -n --color=always {}")'
 
 zstyle ':autocomplete:*' default-context history-incremental-search-backward
+
+alias vi="nvim"
+export PATH="$PATH:/home/darklord/.platformio/penv/bin"
+
+alias ls="eza --icons"
+alias ll="eza --icons -alh"
+alias tree="eza --icons --tree"
+alias trea="eza --icons --tree -alh"
