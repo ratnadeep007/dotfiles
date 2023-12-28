@@ -654,7 +654,6 @@ return {
       })
     end,
     keys = {
-      { "<leader>o", "<cmd>Oil --float<cr>", desc = "Open Oil Float" },
       { "<leader>e", "<cmd>Oil --float<cr>", desc = "Open Oil Float", remap = true },
     },
   },
@@ -981,17 +980,17 @@ return {
       )
     end,
   },
-  {
-    "aznhe21/actions-preview.nvim",
-    config = function()
-      vim.keymap.set(
-        { "v", "n" },
-        "<leader>ca",
-        require("actions-preview").code_actions,
-        { desc = "Code Actions with diff" }
-      )
-    end,
-  },
+  -- {
+  --   "aznhe21/actions-preview.nvim",
+  --   config = function()
+  --     vim.keymap.set(
+  --       { "v", "n" },
+  --       "<leader>ca",
+  --       require("actions-preview").code_actions,
+  --       { desc = "Code Actions with diff", remap = true }
+  --     )
+  --   end,
+  -- },
   -- {
   --   "j-hui/fidget.nvim",
   --   opts = {
@@ -1006,4 +1005,44 @@ return {
     config = true,
   },
   { "kevinhwang91/nvim-bqf" },
+  {
+    "m4xshen/hardtime.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+    opts = {},
+    config = true,
+  },
+  {
+    "nomnivore/ollama.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+
+    -- All the user commands added by the plugin
+    cmd = { "Ollama", "OllamaModel", "OllamaServe", "OllamaServeStop" },
+
+    keys = {
+      -- Sample keybind for prompt menu. Note that the <c-u> is important for selections to work properly.
+      {
+
+        "<leader>oa",
+        ":<c-u>lua require('ollama').prompt()<cr>",
+        desc = "ollama prompt",
+        mode = { "n", "v" },
+      },
+
+      -- Sample keybind for direct prompting. Note that the <c-u> is important for selections to work properly.
+      -- {
+      --   "<leader>op",
+      --   ":<c-u>lua require('ollama').prompt('Generate_Code')<cr>",
+      --   desc = "ollama Generate Code",
+      --   mode = { "n", "v" },
+      -- },
+    },
+
+    ---@type Ollama.Config
+    opts = {
+      model = "deepseek-coder",
+      -- your configuration overrides
+    },
+  },
 }
