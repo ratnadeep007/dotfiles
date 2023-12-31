@@ -624,6 +624,11 @@ return {
               col = "100%",
             },
           },
+          popup = {
+            border = {
+              style = "single",
+            },
+          },
         },
       })
     end,
@@ -1023,7 +1028,6 @@ return {
     keys = {
       -- Sample keybind for prompt menu. Note that the <c-u> is important for selections to work properly.
       {
-
         "<leader>oa",
         ":<c-u>lua require('ollama').prompt()<cr>",
         desc = "ollama prompt",
@@ -1045,4 +1049,8 @@ return {
       -- your configuration overrides
     },
   },
+  { "ellisonleao/glow.nvim", config = true, cmd = "Glow", opts = {
+    border = "shadow",
+  } },
+  { "nvim-focus/focus.nvim", version = "*", config = true },
 }
