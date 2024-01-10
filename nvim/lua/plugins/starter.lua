@@ -245,7 +245,7 @@ return {
     opts = {
       defaults = {
         layout_strategy = "horizontal",
-        layout_config = { prompt_position = "top" },
+        layout_config = { prompt_position = "bottom" },
         sorting_strategy = "ascending",
         winblend = 0,
       },
@@ -1052,5 +1052,5 @@ return {
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow", opts = {
     border = "shadow",
   } },
-  { "nvim-focus/focus.nvim", version = "*", config = true },
+  { "nvim-focus/focus.nvim", version = "1.0.0", config = true },
 }
