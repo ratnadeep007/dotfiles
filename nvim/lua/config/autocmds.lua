@@ -25,7 +25,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
     -- end
     -- print("working")
     require("ufo").detach()
-    require("barbecue.ui").toggle(true)
     vim.opt_local.foldenable = false
   end,
 })
