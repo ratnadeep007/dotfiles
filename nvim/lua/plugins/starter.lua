@@ -813,6 +813,7 @@ return {
     config = function()
       require("barbecue").setup({
         create_autocmd = false,
+        theme = "tokyonight",
       })
     end,
   },
