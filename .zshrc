@@ -12,6 +12,8 @@ plug "jeffreytse/zsh-vi-mode"
 eval "$(starship init zsh)"
 # plug "wintermi/zsh-starship"
 
+typeset -A ZSH_HIGHLIGHT_STYLES
+
 # Load and initialise completion system
 autoload -Uz compinit
 compinit
@@ -194,9 +196,14 @@ zvm_before_init() {
   local ncur=$(zvm_cursor_style $ZVM_NORMAL_MODE_CURSOR)
   local icur=$(zvm_cursor_style $ZVM_INSERT_MODE_CURSOR)
 
-  # TokyoNight
-  ZVM_INSERT_MODE_CURSOR=$ncur'\e\e]12;#1abc9c\a'
-  ZVM_NORMAL_MODE_CURSOR=$ncur'\e\e]12;#394b70\a'
+  # Rose Pine
+  ZVM_INSERT_MODE_CURSOR=$ncur'\e\e]12;#9ccfd8\a'
+  ZVM_NORMAL_MODE_CURSOR=$ncur'\e\e]12;#31748f\a'
+  ZSH_HIGHLIGHT_HIGHLIGHTS+=(brackets pattern cursor)
+  ZSH_HIGHLIGHT_STYLES[command]='fg=cyan,bold'
+  ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan,bold'
+  ZSH_HIGHLIGHT_STYLES[global-alias]='fg=cyan,bold'
+  ZSH_HIGHLIGHT_STYLES[builtin]='fg=cyan,bold'
 }
 
 export NVM_DIR="$HOME/.nvm"
@@ -222,3 +229,5 @@ alias ll="eza --icons -alh"
 alias tree="eza --icons --tree"
 alias trea="eza --icons --tree -alh"
 alias rscreen="ffmpeg -video_size 1920x1080 -framerate 25 -f x11grab -i :1.0+1920,0 output.mp4"
+
+export PATH="$PATH:$HOME/.local/share/bob/nvim-bin"/

@@ -182,6 +182,7 @@ return {
     opts = {},
   },
   { "ellisonleao/gruvbox.nvim" },
+  { "rose-pine/neovim", name = "rose-pine" },
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
     "Mofiqul/dracula.nvim",
@@ -196,7 +197,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight-night",
+      colorscheme = "rose-pine",
     },
   },
 
@@ -271,15 +272,21 @@ return {
     dependencies = {
       "jose-elias-alvarez/typescript.nvim",
       init = function()
-        require("lazyvim.util").lsp.on_attach(function(_, buffer)
+        require("lazyvim.util").lsp.on_attach(function(client, buffer)
           -- stylua: ignore
           vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
           vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
+          if client.server_capabilities.inlayHintProvider then
+            print("inside inlay hint typescript")
+            print(client.server_capabilities.inlayHintProvider)
+            vim.lsp.inlay_hint.enable(buffer, true)
+          end
         end)
       end,
     },
     ---@class PluginLspOpts
     opts = {
+      inlay_hints = { enabled = true },
       ---@type lspconfig.options
       servers = {
         -- tsserver will be automatically installed with mason and loaded with lspconfig
@@ -357,7 +364,7 @@ return {
       end
       return {
         options = {
-          theme = "tokyonight",
+          theme = "rose-pine",
           disable_filetypes = { statusline = { "dashboard", "alpha" } },
         },
         sections = {

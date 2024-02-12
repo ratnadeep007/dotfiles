@@ -37,7 +37,7 @@ config.font = wezterm.font({
 		"dlig=1",
 	},
 })
-config.color_scheme = "Tokyo Night"
+config.color_scheme = "Rosé Pine (base16)"
 config.window_background_opacity = 2.0
 config.enable_wayland = true
 config.hide_tab_bar_if_only_one_tab = true
