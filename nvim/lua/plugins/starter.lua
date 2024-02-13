@@ -484,7 +484,7 @@ return {
           copy = "#7dcfff",
           delete = "#f7768e",
           insert = "#1abc9c",
-          visual = "#7aa2f7",
+          visual = "#fd57bb",
         },
         -- line_opacity = 0.15,
         set_cursor = true,
@@ -1060,5 +1060,36 @@ return {
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow", opts = {
     border = "shadow",
   } },
-  { "nvim-focus/focus.nvim", version = "1.0.0", config = true },
+  { "nvim-focus/focus.nvim", version = "2.0.0", config = true },
+  {
+    "akinsho/flutter-tools.nvim",
+    lazy = false,
+    keys = {
+      {
+        "<leader>fr",
+        "FlutterRun",
+        desc = "Flutter Run",
+        mode = { "n" },
+      },
+      {
+        "<leader>fq",
+        "FlutterQuit",
+        desc = "Flutter Quit",
+        mode = { "n" },
+      },
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "stevearc/dressing.nvim", -- optional for vim.ui.select
+    },
+    config = true,
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+  },
 }
