@@ -276,11 +276,11 @@ return {
           -- stylua: ignore
           vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
           vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
-          if client.server_capabilities.inlayHintProvider then
-            print("inside inlay hint typescript")
-            print(client.server_capabilities.inlayHintProvider)
-            vim.lsp.inlay_hint.enable(buffer, true)
-          end
+          -- if client.server_capabilities.inlayHintProvider then
+          --   print("inside inlay hint typescript")
+          --   print(client.server_capabilities.inlayHintProvider)
+          --   vim.lsp.inlay_hint.enable(buffer, true)
+          -- end
         end)
       end,
     },
