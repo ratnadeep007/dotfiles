@@ -1,16 +1,24 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
-function _G.set_terminal_keymaps()
-  local opts = { buffer = 0 }
-  vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
-  vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
-  vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
-  vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
-  vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
-  vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
-  vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
-end
+-- Buffers
+vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+vim.keymap.set("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete Buffer" })
 
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+-- clear hlsearch
+vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+
+-- split window
+vim.keymap.set("n", "<leader>w-", "<C-W>s", { desc = "Split window below", remap = true })
+vim.keymap.set("n", "<leader>w|", "<C-W>v", { desc = "Split window right", remap = true })
+vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
+vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
+
+-- lsp saga
+vim.keymap.set("n", "gd", ":Lspsaga goto_definition<CR>", { remap = true, silent = true, desc = "Go to definition"})
+vim.keymap.set("n", "gr", ":Lspsaga finder<CR>", { remap = true, silent = true, desc = "Saga References"})
+vim.keymap.set("n", "ca", ":Lspsaga code_action<CR>", { remap = true, silent = true, desc = "Code Actions"})
+vim.keymap.set("n", "K", ":Lspsaga hover_doc<CR>", { remap = true, silent = true, desc = "Hover Doc"})
+vim.keymap.set("n", "cd", ":Lspsaga show_line_diagnostics<CR>", { remap = true, silent = true, desc = "Line Diagnostc"})
+vim.keymap.set("n", "sd", ":Lspsaga show_buf_diagnostics<CR>", { remap = true, silent = true, desc = "Buffer Diagnostc"})
+vim.keymap.set("n", "wd", ":Lspsaga show_workspace_diagnostics<CR>", { remap = true, silent = true, desc = "Buffer Diagnostc"})
