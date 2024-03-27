@@ -13,6 +13,8 @@ vim.g.mapleader = " "
 vim.g.localleader = "\\"
 vim.api.nvim_set_option("tabstop", 2)
 vim.api.nvim_set_option("shiftwidth", 2)
+vim.api.nvim_set_option("expandtab", true)
+vim.api.nvim_set_option("softtabstop", 2)
 vim.o.laststatus = 3
 
 
@@ -26,3 +28,4 @@ require("lazy").setup({
 })
 
 require("config.keymaps")
+require("config.autocmds")

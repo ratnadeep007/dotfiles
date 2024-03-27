@@ -1,6 +1,17 @@
 local ignore_filetypes = { "dapui_console", "dap-repl", "dapui_watches", "dapui_stacks", "dapui_breakpoints", "outline" }
 local ignore_buftypes = { 'nofile', 'prompt', 'popup' }
 
+local function augroup(name)
+  return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
+end
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup("highlight_yank"),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
+
 local augroup =
     vim.api.nvim_create_augroup('FocusDisable', { clear = true })
 
