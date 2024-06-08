@@ -1,47 +1,41 @@
--- Autocmds are automatically loaded on the VeryLazy event
--- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
--- Add any additional autocmds here
+local ignore_filetypes = { "dapui_console", "dap-repl", "dapui_watches", "dapui_stacks", "dapui_breakpoints", "outline" }
+local ignore_buftypes = { 'nofile', 'prompt', 'popup' }
 
-local ignore_filetypes = { "nvcheatsheet", "neo-tree", "Outline" }
+local function augroup(name)
+  return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
+end
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = ignore_filetypes,
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup("highlight_yank"),
   callback = function()
-    -- if ignore_filetypes[vim.bo.filetype] or vim.bo.buftype == "nofile" then
-    --   require("ufo").detach()
-    --   vim.opt_local.foldenable = false
-    -- end
-    -- print("working")
-    require("ufo").detach()
-    vim.opt_local.foldenable = false
-  end,
-})
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = ignore_filetypes,
-  callback = function()
-    -- if ignore_filetypes[vim.bo.filetype] or vim.bo.buftype == "nofile" then
-    --   require("ufo").detach()
-    --   vim.opt_local.foldenable = false
-    -- end
-    -- print("working")
-    require("ufo").detach()
-    vim.opt_local.foldenable = false
+    vim.highlight.on_yank()
   end,
 })
 
-vim.opt.updatetime = 200
+local augroup =
+    vim.api.nvim_create_augroup('FocusDisable', { clear = true })
 
-vim.api.nvim_create_autocmd({
-  "WinScrolled", -- or WinResized on NVIM-v0.9 and higher
-  "BufWinEnter",
-  "CursorHold",
-  "InsertLeave",
-
-  -- include this if you have set `show_modified` to `true`
-  "BufModifiedSet",
-}, {
-  group = vim.api.nvim_create_augroup("barbecue.updater", {}),
-  callback = function()
-    require("barbecue.ui").update()
-  end,
-})
+-- vim.api.nvim_create_autocmd('WinEnter', {
+--     group = augroup,
+--     callback = function(_)
+--         if vim.tbl_contains(ignore_buftypes, vim.bo.buftype)
+--         then
+--             vim.w.focus_disable = true
+--         else
+--             vim.w.focus_disable = false
+--         end
+--     end,
+--     desc = 'Disable focus autoresize for BufType',
+-- })
+--
+-- vim.api.nvim_create_autocmd('FileType', {
+--     group = augroup,
+--     callback = function(_)
+--         if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
+--             vim.b.focus_disable = true
+--         else
+--             vim.b.focus_disable = false
+--         end
+--     end,
+--     desc = 'Disable focus autoresize for FileType',
+-- })
