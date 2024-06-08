@@ -18,11 +18,13 @@ end
 
 -- For example, changing the color scheme:
 -- config.color_scheme = "Dracula (Official)"
+config.color_scheme = "Kanagawa (Gogh)"
 -- config.font = wezterm.font("Cascadia Code PL")
 -- config.font = wezterm.font("Fira Code")
 -- config.font = wezterm.font("Iosevka Term", { weight = "Medium", stretch = "Normal", style = "Normal" })
 config.font = wezterm.font({
 	family = "Monaspace Neon",
+	-- family = "Monaspace Radon",
 	weight = "Regular",
 	harfbuzz_features = {
 		"ss01=1",
@@ -37,7 +39,7 @@ config.font = wezterm.font({
 		"dlig=1",
 	},
 })
-config.color_scheme = "Rosé Pine (base16)"
+config.color_scheme = "Kanagawa (Gogh)"
 config.window_background_opacity = 2.0
 config.enable_wayland = true
 config.hide_tab_bar_if_only_one_tab = true

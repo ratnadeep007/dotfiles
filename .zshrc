@@ -8,7 +8,7 @@ plug "zsh-users/zsh-autosuggestions"
 plug "zap-zsh/supercharge"
 plug "zap-zsh/zap-prompt"
 plug "zsh-users/zsh-syntax-highlighting"
-plug "jeffreytse/zsh-vi-mode"
+# plug "jeffreytse/zsh-vi-mode"
 eval "$(starship init zsh)"
 # plug "wintermi/zsh-starship"
 
@@ -241,3 +241,12 @@ eval "$(rbenv init - zsh)"
 alias open="/usr/bin/open"
 export PATH="$PATH:$HOME/dev-tools/flutter/bin"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+if [ -f "/Users/ratnadeepb/.config/fabric/fabric-bootstrap.inc" ]; then . "/Users/ratnadeepb/.config/fabric/fabric-bootstrap.inc"; fi
+
+alias cls="clear"
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+
+export PATH="$PATH:$HOME/.config/emacs/bin"
