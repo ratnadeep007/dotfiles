@@ -23,6 +23,7 @@ return {
       { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
       { "<leader>sg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
       { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+      { "<leader>fc", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffers" },
     },
     dependencies = {
       "nvim-telescope/telescope-fzf-native.nvim",

@@ -11,6 +11,9 @@ vim.opt.relativenumber = true
 vim.opt.showmode = false
 vim.g.mapleader = " "
 vim.g.localleader = "\\"
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
 vim.api.nvim_set_option("tabstop", 2)
 vim.api.nvim_set_option("shiftwidth", 2)
 vim.api.nvim_set_option("expandtab", true)
@@ -23,7 +26,7 @@ require("lazy").setup({
 }, {
   install = {
     missing = true,
-    -- colorscheme = { "kanagawa" },
+    colorscheme = { "kanagawa" },
   }
 })
 

@@ -24,11 +24,12 @@ vim.keymap.set("n", "<leader>sd", ":Lspsaga show_buf_diagnostics<CR>", { remap =
 vim.keymap.set("n", "<leader>wd", ":Lspsaga show_workspace_diagnostics<CR>", { remap = true, silent = true, desc = "Buffer Diagnostc"})
 
 -- nvim tmux navigate
-vim.keymap.set("n", "<c-h>", ":TmuxNavigateLeft<CR>", { remap = true, silent = true, desc = "Go to definition"})
-vim.keymap.set("n", "<c-j>", ":TmuxNavigateDown<CR>", { remap = true, silent = true, desc = "Go to definition"})
-vim.keymap.set("n", "<c-k>", ":TmuxNavigateUp<CR>", { remap = true, silent = true, desc = "Go to definition"})
-vim.keymap.set("n", "<c-l>", ":TmuxNavigateRight<CR>", { remap = true, silent = true, desc = "Go to definition"})
-vim.keymap.set("n", "<c-\\>", ":TmuxNavigatePrevious<CR>", { remap = true, silent = true, desc = "Go to definition"})
+vim.keymap.set("n", "<c-h>", ":TmuxNavigateLeft<CR>", { remap = true, silent = true, desc = "Tmux Navigate Left"})
+vim.keymap.set("n", "<c-j>", ":TmuxNavigateDown<CR>", { remap = true, silent = true, desc = "Tmux Navigate Down"})
+vim.keymap.set("n", "<c-k>", ":TmuxNavigateUp<CR>", { remap = true, silent = true, desc = "Tmux Navigate Up"})
+vim.keymap.set("n", "<c-l>", ":TmuxNavigateRight<CR>", { remap = true, silent = true, desc = "Tmux Navigate Right"})
+vim.keymap.set("n", "<c-\\>", ":TmuxNavigatePrevious<CR>", { remap = true, silent = true, desc = "Tmux Navigate Previous"})
+
 
 -- Trouble.nvim
 vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end, { remap = true, silent = true, desc = "Toggle Trouble"})
@@ -43,6 +44,10 @@ vim.keymap.set("n", "<leader>hm", function() require("harpoon.mark").add_file() 
 vim.keymap.set("n", "<leader>hu", function() require("harpoon.ui").toggle_quick_menu() end, { remap = true, silent = true, desc = "Harpoon show UI"})
 vim.keymap.set("n", "<leader>hn", function() require("harpoon.ui").nav_next() end, { remap = true, silent = true, desc = "Harpoon Next"})
 vim.keymap.set("n", "<leader>hp", function() require("harpoon.ui").nav_prev() end, { remap = true, silent = true, desc = "Harpoon Previous"})
+
+-- quickfix navigation
+vim.keymap.set("n", "cn", "<cmd>cnext<cr>", { remap = true, silent = true, desc = "Next Quickfix"})
+vim.keymap.set("n", "cp", "<cmd>cprevious<cr>", { remap = true, silent = true, desc = "Previous Quickfix"})
 
 -- wrap around 
 -- local function try_jump_window(direction, count)
