@@ -1,0 +1,11 @@
+-- Plugin to handle autoclosing and editing to html tags
+return {
+  'windwp/nvim-ts-autotag',
+  opts = {
+    opts = {
+      enable_close = true,
+      enable_rename = true,
+      enable_close_on_slash = false,
+    },
+  },
+}
