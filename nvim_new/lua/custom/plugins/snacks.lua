@@ -2,7 +2,7 @@ return {
   'folke/snacks.nvim',
   priority = 1000,
   lazy = false,
-  enabled = false,
+  enabled = true,
   ---@type snacks.Config
   opts = {
     -- your configuration comes here
@@ -12,7 +12,7 @@ return {
     dashboard = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },
-    notifier = { enabled = true },
+    notifier = { enabled = false },
     quickfile = { enabled = true },
     scroll = { enabled = true },
     statuscolumn = { enabled = true },
